@@ -1,6 +1,7 @@
 import { SourceFile, SourceDirectory } from '../sources/index';
 import { Reflection, ReflectionKind } from './abstract';
 import { ContainerReflection } from './container';
+import { ReflectionCategory } from '../ReflectionCategory';
 
 /**
  * A reflection that represents the root of the project.
@@ -25,6 +26,11 @@ export class ProjectReflection extends ContainerReflection {
      * A list of all source files within the project.
      */
     files: SourceFile[] = [];
+
+    /**
+     * All reflections categorized.
+     */
+    categories: ReflectionCategory[];
 
     /**
      * The name of the project.
@@ -94,11 +100,17 @@ export class ProjectReflection extends ContainerReflection {
      */
     findReflectionByName(arg: any): Reflection {
         const names: string[] = Array.isArray(arg) ? arg : arg.split('.');
-        const name = names.pop();
+        let name = names.pop();
+        // Did the @link tag use static syntax?
+        let staticLink = false;
+        if (name.indexOf('@static-') === 0) {
+            staticLink = true;
+            name = name.slice(8);
+        }
 
         search: for (let key in this.reflections) {
             const reflection = this.reflections[key];
-            if (reflection.name !== name) {
+            if (reflection.name !== name || (staticLink && !reflection.flags.isStatic)) {
                 continue;
             }
 
@@ -116,5 +128,23 @@ export class ProjectReflection extends ContainerReflection {
         }
 
         return null;
+    }
+
+    /**
+     * Return a raw object representation of this reflection.
+     */
+    toObject(): any {
+        const result = super.toObject();
+
+        if (this.categories) {
+            const categories: any[] = [];
+            this.categories.forEach((category) => {
+                categories.push(category.toObject());
+            });
+
+            result['categories'] = categories;
+        }
+
+        return result;
     }
 }

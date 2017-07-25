@@ -413,9 +413,12 @@ export abstract class Reflection {
      */
     getAlias(): string {
         if (!this._alias) {
-            let alias = this.name.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+            let alias = this.name.replace(/[^a-z0-9]/gi, '_');
             if (alias === '') {
                 alias = 'reflection-' + this.id;
+            }
+            if (this.flags && this.flags.isStatic) {
+                alias = 'static-' + alias;
             }
 
             let target = <Reflection> this;
@@ -469,11 +472,17 @@ export abstract class Reflection {
      */
     getChildByName(arg: any): Reflection {
         const names: string[] = Array.isArray(arg) ? arg : arg.split('.');
-        const name = names[0];
+        let name = names[0];
         let result: Reflection = null;
+        // Did the @link tag use static syntax?
+        let staticLink = false;
+        if (name.indexOf('@static-') === 0) {
+            staticLink = true;
+            name = name.slice(8);
+        }
 
         this.traverse((child) => {
-            if (child.name === name) {
+            if (child.name === name && !(staticLink && !child.flags.isStatic)) {
                 if (names.length <= 1) {
                     result = child;
                 } else if (child) {

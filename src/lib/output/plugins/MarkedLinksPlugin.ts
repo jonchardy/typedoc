@@ -33,6 +33,13 @@ export class MarkedLinksPlugin extends ContextAwareRendererComponent {
     })
     listInvalidSymbolLinks: boolean;
 
+    @Option({
+        name: 'jsDocLinks',
+        help: 'Parse JSDoc-style @link inline tags.',
+        type: ParameterType.Boolean
+    })
+    jsDocLinks: boolean;
+
     private warnings: string[] = [];
 
     /**
@@ -73,8 +80,26 @@ export class MarkedLinksPlugin extends ContextAwareRendererComponent {
     private replaceInlineTags(text: string): string {
         return text.replace(this.inlineTag, (match: string, leading: string, tagName: string, content: string): string => {
             const split   = MarkedLinksPlugin.splitLinkText(content);
-            const target  = split.target;
-            const caption = leading || split.caption;
+            let target  = split.target;
+            let caption = leading || split.caption;
+
+            // Convert any JSDoc-style @link syntax, not fully featured: https://github.com/TypeStrong/typedoc/issues/488
+            if (this.jsDocLinks) {
+                if (caption === target) {
+                    caption = caption.replace(/#/, '.');
+                    // Remove leading ., if there is one
+                    if (caption.charAt(0) === '.') {
+                        caption = caption.slice(1);
+                    }
+                }
+                // Static member syntax: 'Foo.bar'
+                target = target.replace(/\./, '.@static-');
+                // Instance member syntax: 'Foo#bar'
+                target = target.replace(/#/, '.');
+                if (target.charAt(0) === '.') {
+                    target = target.slice(1);
+                }
+            }
 
             let monospace: boolean;
             if (tagName === 'linkcode') {

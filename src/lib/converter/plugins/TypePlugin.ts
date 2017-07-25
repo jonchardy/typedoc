@@ -153,8 +153,20 @@ export class TypePlugin extends ConverterComponent {
                 }
             }
 
+            function walkTypeParents(child: DeclarationReflection) {
+                let parents = child.extendedTypes;
+                if (parents !== null) {
+                    let firstParent = parents[0] as ReferenceType;
+                    let parentReflection = firstParent.reflection as DeclarationReflection;
+                    if (parentReflection && parentReflection.extendedTypes) {
+                        walkTypeParents(parentReflection);
+                    }
+                    push(parents);
+                }
+            }
+
             if (reflection.extendedTypes) {
-                push(reflection.extendedTypes);
+                walkTypeParents(reflection);
             }
 
             push([new ReferenceType(reflection.name, ReferenceType.SYMBOL_ID_RESOLVED, reflection)]);

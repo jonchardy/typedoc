@@ -32,7 +32,7 @@
                 "id": 13
               },
               "arguments": {
-                "options": "{\n    name: 'Name of class'\n}"
+                "options": "{\r\n    name: 'Name of class'\r\n}"
               }
             }
           ],
@@ -376,6 +376,14 @@
     {
       "title": "External modules",
       "kind": 1,
+      "children": [
+        1
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "title": "Diagram",
       "children": [
         1
       ]

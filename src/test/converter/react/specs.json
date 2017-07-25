@@ -560,7 +560,7 @@
               ]
             },
             {
-              "title": "Properties",
+              "title": "Constants",
               "kind": 1024,
               "children": [
                 34,
@@ -668,7 +668,7 @@
           ],
           "groups": [
             {
-              "title": "Properties",
+              "title": "Constants",
               "kind": 1024,
               "children": [
                 4,
@@ -714,6 +714,14 @@
     {
       "title": "External modules",
       "kind": 1,
+      "children": [
+        1
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "title": "Diagram",
       "children": [
         1
       ]

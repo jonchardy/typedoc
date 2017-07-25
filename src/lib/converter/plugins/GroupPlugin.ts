@@ -60,10 +60,11 @@ export class GroupPlugin extends ConverterComponent {
     static PLURALS = (function() {
         const plurals = {};
         plurals[ReflectionKind.Class]      = 'Classes';
-        plurals[ReflectionKind.Property]   = 'Properties';
+        plurals[ReflectionKind.Property]   = 'Constants';
         plurals[ReflectionKind.Enum]       = 'Enumerations';
         plurals[ReflectionKind.EnumMember] = 'Enumeration members';
         plurals[ReflectionKind.TypeAlias]  = 'Type aliases';
+        plurals[ReflectionKind.Accessor]   = 'Properties';
         return plurals;
     })();
 

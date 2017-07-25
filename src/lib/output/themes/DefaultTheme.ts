@@ -48,22 +48,22 @@ export class DefaultTheme extends Theme {
     static MAPPINGS: TemplateMapping[] = [{
         kind:      [ReflectionKind.Class],
         isLeaf:    false,
-        directory: 'classes',
+        directory: 'symbols',
         template:  'reflection.hbs'
     }, {
         kind:      [ReflectionKind.Interface],
         isLeaf:    false,
-        directory: 'interfaces',
+        directory: 'symbols',
         template:  'reflection.hbs'
     }, {
         kind:      [ReflectionKind.Enum],
         isLeaf:    false,
-        directory: 'enums',
+        directory: 'symbols',
         template:  'reflection.hbs'
     }, {
         kind:      [ReflectionKind.Module, ReflectionKind.ExternalModule],
         isLeaf:    false,
-        directory: 'modules',
+        directory: 'symbols',
         template:  'reflection.hbs'
     }];
 
@@ -278,7 +278,7 @@ export class DefaultTheme extends Theme {
             const root = new NavigationItem('Index', 'index.html');
 
             if (entryPoint === project) {
-                const globals = new NavigationItem('Globals', hasSeparateGlobals ? 'globals.html' : 'index.html', root);
+                const globals = new NavigationItem('GoJS Class Index', 'index.html', root);
                 globals.isGlobals = true;
             }
 
@@ -410,9 +410,6 @@ export class DefaultTheme extends Theme {
      */
     static applyAnchorUrl(reflection: Reflection, container: Reflection) {
         let anchor = DefaultTheme.getUrl(reflection, container, '.');
-        if (reflection['isStatic']) {
-            anchor = 'static-' + anchor;
-        }
 
         reflection.url = container.url + '#' + anchor;
         reflection.anchor = anchor;

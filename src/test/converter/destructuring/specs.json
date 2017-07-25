@@ -408,5 +408,13 @@
         1
       ]
     }
+  ],
+  "categories": [
+    {
+      "title": "Diagram",
+      "children": [
+        1
+      ]
+    }
   ]
 }
