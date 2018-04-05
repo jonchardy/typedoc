@@ -72,164 +72,6 @@
               }
             },
             {
-              "id": 34,
-              "name": "context",
-              "kind": 1024,
-              "kindString": "Property",
-              "flags": {},
-              "sources": [
-                {
-                  "fileName": "react.d.ts",
-                  "line": 142,
-                  "character": 15
-                }
-              ],
-              "type": {
-                "type": "reference",
-                "name": "__type"
-              },
-              "inheritedFrom": {
-                "type": "reference",
-                "name": "Component.context"
-              }
-            },
-            {
-              "id": 6,
-              "name": "foo",
-              "kind": 1024,
-              "kindString": "Property",
-              "flags": {
-                "isPrivate": true
-              },
-              "sources": [
-                {
-                  "fileName": "react.tsx",
-                  "line": 14,
-                  "character": 15
-                }
-              ],
-              "type": {
-                "type": "intrinsic",
-                "name": "number"
-              }
-            },
-            {
-              "id": 32,
-              "name": "props",
-              "kind": 1024,
-              "kindString": "Property",
-              "flags": {},
-              "sources": [
-                {
-                  "fileName": "react.d.ts",
-                  "line": 140,
-                  "character": 13
-                }
-              ],
-              "type": {
-                "type": "reference",
-                "name": "DemoProps",
-                "id": 2
-              },
-              "inheritedFrom": {
-                "type": "reference",
-                "name": "Component.props"
-              }
-            },
-            {
-              "id": 35,
-              "name": "refs",
-              "kind": 1024,
-              "kindString": "Property",
-              "flags": {},
-              "sources": [
-                {
-                  "fileName": "react.d.ts",
-                  "line": 143,
-                  "character": 12
-                }
-              ],
-              "type": {
-                "type": "reflection",
-                "declaration": {
-                  "id": 36,
-                  "name": "__type",
-                  "kind": 65536,
-                  "kindString": "Type literal",
-                  "flags": {},
-                  "indexSignature": [
-                    {
-                      "id": 37,
-                      "name": "__index",
-                      "kind": 8192,
-                      "kindString": "Index signature",
-                      "flags": {},
-                      "parameters": [
-                        {
-                          "id": 38,
-                          "name": "key",
-                          "kind": 32768,
-                          "kindString": "Parameter",
-                          "flags": {},
-                          "type": {
-                            "type": "intrinsic",
-                            "name": "string"
-                          }
-                        }
-                      ],
-                      "type": {
-                        "type": "reference",
-                        "name": "Component",
-                        "typeArguments": [
-                          {
-                            "type": "intrinsic",
-                            "name": "any"
-                          },
-                          {
-                            "type": "intrinsic",
-                            "name": "any"
-                          }
-                        ]
-                      }
-                    }
-                  ],
-                  "sources": [
-                    {
-                      "fileName": "react.d.ts",
-                      "line": 143,
-                      "character": 13
-                    }
-                  ]
-                }
-              },
-              "inheritedFrom": {
-                "type": "reference",
-                "name": "Component.refs"
-              }
-            },
-            {
-              "id": 33,
-              "name": "state",
-              "kind": 1024,
-              "kindString": "Property",
-              "flags": {},
-              "sources": [
-                {
-                  "fileName": "react.d.ts",
-                  "line": 141,
-                  "character": 13
-                }
-              ],
-              "type": {
-                "type": "intrinsic",
-                "name": "any"
-              },
-              "inheritedFrom": {
-                "type": "reference",
-                "name": "Component.state"
-              }
-            },
-            {
               "id": 27,
               "name": "forceUpdate",
               "kind": 2048,
@@ -549,6 +391,164 @@
                 "type": "reference",
                 "name": "Component.setState"
               }
+            },
+            {
+              "id": 34,
+              "name": "context",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {},
+              "sources": [
+                {
+                  "fileName": "react.d.ts",
+                  "line": 142,
+                  "character": 15
+                }
+              ],
+              "type": {
+                "type": "reference",
+                "name": "__type"
+              },
+              "inheritedFrom": {
+                "type": "reference",
+                "name": "Component.context"
+              }
+            },
+            {
+              "id": 6,
+              "name": "foo",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {
+                "isPrivate": true
+              },
+              "sources": [
+                {
+                  "fileName": "react.tsx",
+                  "line": 14,
+                  "character": 15
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "number"
+              }
+            },
+            {
+              "id": 32,
+              "name": "props",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {},
+              "sources": [
+                {
+                  "fileName": "react.d.ts",
+                  "line": 140,
+                  "character": 13
+                }
+              ],
+              "type": {
+                "type": "reference",
+                "name": "DemoProps",
+                "id": 2
+              },
+              "inheritedFrom": {
+                "type": "reference",
+                "name": "Component.props"
+              }
+            },
+            {
+              "id": 35,
+              "name": "refs",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {},
+              "sources": [
+                {
+                  "fileName": "react.d.ts",
+                  "line": 143,
+                  "character": 12
+                }
+              ],
+              "type": {
+                "type": "reflection",
+                "declaration": {
+                  "id": 36,
+                  "name": "__type",
+                  "kind": 65536,
+                  "kindString": "Type literal",
+                  "flags": {},
+                  "indexSignature": [
+                    {
+                      "id": 37,
+                      "name": "__index",
+                      "kind": 8192,
+                      "kindString": "Index signature",
+                      "flags": {},
+                      "parameters": [
+                        {
+                          "id": 38,
+                          "name": "key",
+                          "kind": 32768,
+                          "kindString": "Parameter",
+                          "flags": {},
+                          "type": {
+                            "type": "intrinsic",
+                            "name": "string"
+                          }
+                        }
+                      ],
+                      "type": {
+                        "type": "reference",
+                        "name": "Component",
+                        "typeArguments": [
+                          {
+                            "type": "intrinsic",
+                            "name": "any"
+                          },
+                          {
+                            "type": "intrinsic",
+                            "name": "any"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "sources": [
+                    {
+                      "fileName": "react.d.ts",
+                      "line": 143,
+                      "character": 13
+                    }
+                  ]
+                }
+              },
+              "inheritedFrom": {
+                "type": "reference",
+                "name": "Component.refs"
+              }
+            },
+            {
+              "id": 33,
+              "name": "state",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {},
+              "sources": [
+                {
+                  "fileName": "react.d.ts",
+                  "line": 141,
+                  "character": 13
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "any"
+              },
+              "inheritedFrom": {
+                "type": "reference",
+                "name": "Component.state"
+              }
             }
           ],
           "groups": [
@@ -560,6 +560,15 @@
               ]
             },
             {
+              "title": "Methods",
+              "kind": 2048,
+              "children": [
+                27,
+                10,
+                12
+              ]
+            },
+            {
               "title": "Constants",
               "kind": 1024,
               "children": [
@@ -568,15 +577,6 @@
                 32,
                 35,
                 33
-              ]
-            },
-            {
-              "title": "Methods",
-              "kind": 2048,
-              "children": [
-                27,
-                10,
-                12
               ]
             }
           ],

@@ -25,26 +25,6 @@
           },
           "children": [
             {
-              "id": 4,
-              "name": "name",
-              "kind": 1024,
-              "kindString": "Property",
-              "flags": {
-                "isPrivate": true
-              },
-              "sources": [
-                {
-                  "fileName": "interface-empty.ts",
-                  "line": 12,
-                  "character": 16
-                }
-              ],
-              "type": {
-                "type": "intrinsic",
-                "name": "string"
-              }
-            },
-            {
               "id": 5,
               "name": "goto",
               "kind": 2048,
@@ -72,21 +52,41 @@
                   "character": 15
                 }
               ]
+            },
+            {
+              "id": 4,
+              "name": "name",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {
+                "isPrivate": true
+              },
+              "sources": [
+                {
+                  "fileName": "interface-empty.ts",
+                  "line": 12,
+                  "character": 16
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "string"
+              }
             }
           ],
           "groups": [
-            {
-              "title": "Constants",
-              "kind": 1024,
-              "children": [
-                4
-              ]
-            },
             {
               "title": "Methods",
               "kind": 2048,
               "children": [
                 5
+              ]
+            },
+            {
+              "title": "Constants",
+              "kind": 1024,
+              "children": [
+                4
               ]
             }
           ],

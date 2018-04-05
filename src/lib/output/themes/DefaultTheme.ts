@@ -272,13 +272,14 @@ export class DefaultTheme extends Theme {
          * Build the navigation structure.
          *
          * @param hasSeparateGlobals  Has the project a separated globals.html file?
+         * @param indexTitle          The title to be used on the index page and navigation
          * @return                    The root node of the generated navigation structure.
          */
-        function build(hasSeparateGlobals: boolean): NavigationItem {
+        function build(hasSeparateGlobals: boolean, indexTitle: string): NavigationItem {
             const root = new NavigationItem('Index', 'index.html');
 
             if (entryPoint === project) {
-                const globals = new NavigationItem('GoJS Class Index', 'index.html', root);
+                const globals = new NavigationItem(indexTitle, 'index.html', root);
                 globals.isGlobals = true;
             }
 
@@ -311,7 +312,8 @@ export class DefaultTheme extends Theme {
         }
 
         const entryPoint = this.getEntryPoint(project);
-        return build(this.application.options.getValue('readme') !== 'none');
+        return build(this.application.options.getValue('readme') !== 'none',
+                     this.application.options.getValue('indexTitle'));
     }
 
     /**

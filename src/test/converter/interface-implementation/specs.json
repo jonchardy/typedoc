@@ -49,37 +49,6 @@
               ],
               "children": [
                 {
-                  "id": 47,
-                  "name": "subscriptions",
-                  "kind": 1024,
-                  "kindString": "Property",
-                  "flags": {
-                    "isPrivate": true,
-                    "isExported": true
-                  },
-                  "sources": [
-                    {
-                      "fileName": "interface-implementation.ts",
-                      "line": 57,
-                      "character": 29
-                    }
-                  ],
-                  "type": {
-                    "type": "array",
-                    "elementType": {
-                      "type": "reference",
-                      "name": "ISubscription",
-                      "id": 7,
-                      "typeArguments": [
-                        {
-                          "type": "typeParameter",
-                          "name": "T"
-                        }
-                      ]
-                    }
-                  }
-                },
-                {
                   "id": 48,
                   "name": "add",
                   "kind": 2048,
@@ -357,16 +326,40 @@
                     "name": "IEventDispatcher.remove",
                     "id": 35
                   }
+                },
+                {
+                  "id": 47,
+                  "name": "subscriptions",
+                  "kind": 1024,
+                  "kindString": "Property",
+                  "flags": {
+                    "isPrivate": true,
+                    "isExported": true
+                  },
+                  "sources": [
+                    {
+                      "fileName": "interface-implementation.ts",
+                      "line": 57,
+                      "character": 29
+                    }
+                  ],
+                  "type": {
+                    "type": "array",
+                    "elementType": {
+                      "type": "reference",
+                      "name": "ISubscription",
+                      "id": 7,
+                      "typeArguments": [
+                        {
+                          "type": "typeParameter",
+                          "name": "T"
+                        }
+                      ]
+                    }
+                  }
                 }
               ],
               "groups": [
-                {
-                  "title": "Constants",
-                  "kind": 1024,
-                  "children": [
-                    47
-                  ]
-                },
                 {
                   "title": "Methods",
                   "kind": 2048,
@@ -376,6 +369,13 @@
                     56,
                     61,
                     53
+                  ]
+                },
+                {
+                  "title": "Constants",
+                  "kind": 1024,
+                  "children": [
+                    47
                   ]
                 }
               ],
@@ -505,6 +505,43 @@
                   ]
                 },
                 {
+                  "id": 26,
+                  "name": "unsubscribe",
+                  "kind": 2048,
+                  "kindString": "Method",
+                  "flags": {},
+                  "signatures": [
+                    {
+                      "id": 27,
+                      "name": "unsubscribe",
+                      "kind": 4096,
+                      "kindString": "Call signature",
+                      "flags": {},
+                      "type": {
+                        "type": "intrinsic",
+                        "name": "void"
+                      },
+                      "implementationOf": {
+                        "type": "reference",
+                        "name": "ISubscription.unsubscribe",
+                        "id": 13
+                      }
+                    }
+                  ],
+                  "sources": [
+                    {
+                      "fileName": "interface-implementation.ts",
+                      "line": 32,
+                      "character": 19
+                    }
+                  ],
+                  "implementationOf": {
+                    "type": "reference",
+                    "name": "ISubscription.unsubscribe",
+                    "id": 12
+                  }
+                },
+                {
                   "id": 20,
                   "name": "dispatcher",
                   "kind": 1024,
@@ -616,43 +653,6 @@
                     "name": "ISubscription.priority",
                     "id": 10
                   }
-                },
-                {
-                  "id": 26,
-                  "name": "unsubscribe",
-                  "kind": 2048,
-                  "kindString": "Method",
-                  "flags": {},
-                  "signatures": [
-                    {
-                      "id": 27,
-                      "name": "unsubscribe",
-                      "kind": 4096,
-                      "kindString": "Call signature",
-                      "flags": {},
-                      "type": {
-                        "type": "intrinsic",
-                        "name": "void"
-                      },
-                      "implementationOf": {
-                        "type": "reference",
-                        "name": "ISubscription.unsubscribe",
-                        "id": 13
-                      }
-                    }
-                  ],
-                  "sources": [
-                    {
-                      "fileName": "interface-implementation.ts",
-                      "line": 32,
-                      "character": 19
-                    }
-                  ],
-                  "implementationOf": {
-                    "type": "reference",
-                    "name": "ISubscription.unsubscribe",
-                    "id": 12
-                  }
                 }
               ],
               "groups": [
@@ -664,6 +664,13 @@
                   ]
                 },
                 {
+                  "title": "Methods",
+                  "kind": 2048,
+                  "children": [
+                    26
+                  ]
+                },
+                {
                   "title": "Constants",
                   "kind": 1024,
                   "children": [
@@ -671,13 +678,6 @@
                     18,
                     17,
                     19
-                  ]
-                },
-                {
-                  "title": "Methods",
-                  "kind": 2048,
-                  "children": [
-                    26
                   ]
                 }
               ],
@@ -1058,6 +1058,36 @@
               ],
               "children": [
                 {
+                  "id": 12,
+                  "name": "unsubscribe",
+                  "kind": 2048,
+                  "kindString": "Method",
+                  "flags": {},
+                  "signatures": [
+                    {
+                      "id": 13,
+                      "name": "unsubscribe",
+                      "kind": 4096,
+                      "kindString": "Call signature",
+                      "flags": {},
+                      "comment": {
+                        "shortText": "Remove this subscription from its dispatcher"
+                      },
+                      "type": {
+                        "type": "intrinsic",
+                        "name": "void"
+                      }
+                    }
+                  ],
+                  "sources": [
+                    {
+                      "fileName": "interface-implementation.ts",
+                      "line": 24,
+                      "character": 19
+                    }
+                  ]
+                },
+                {
                   "id": 11,
                   "name": "filter",
                   "kind": 1024,
@@ -1117,39 +1147,16 @@
                     "type": "intrinsic",
                     "name": "number"
                   }
-                },
-                {
-                  "id": 12,
-                  "name": "unsubscribe",
-                  "kind": 2048,
-                  "kindString": "Method",
-                  "flags": {},
-                  "signatures": [
-                    {
-                      "id": 13,
-                      "name": "unsubscribe",
-                      "kind": 4096,
-                      "kindString": "Call signature",
-                      "flags": {},
-                      "comment": {
-                        "shortText": "Remove this subscription from its dispatcher"
-                      },
-                      "type": {
-                        "type": "intrinsic",
-                        "name": "void"
-                      }
-                    }
-                  ],
-                  "sources": [
-                    {
-                      "fileName": "interface-implementation.ts",
-                      "line": 24,
-                      "character": 19
-                    }
-                  ]
                 }
               ],
               "groups": [
+                {
+                  "title": "Methods",
+                  "kind": 2048,
+                  "children": [
+                    12
+                  ]
+                },
                 {
                   "title": "Constants",
                   "kind": 1024,
@@ -1157,13 +1164,6 @@
                     11,
                     9,
                     10
-                  ]
-                },
-                {
-                  "title": "Methods",
-                  "kind": 2048,
-                  "children": [
-                    12
                   ]
                 }
               ],

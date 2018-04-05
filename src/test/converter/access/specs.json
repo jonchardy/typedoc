@@ -28,54 +28,6 @@
           },
           "children": [
             {
-              "id": 3,
-              "name": "fakePrivateVariable",
-              "kind": 1024,
-              "kindString": "Property",
-              "flags": {
-                "isPrivate": true,
-                "isExported": true
-              },
-              "comment": {
-                "shortText": "A variable that is made private via comment."
-              },
-              "sources": [
-                {
-                  "fileName": "access.ts",
-                  "line": 35,
-                  "character": 23
-                }
-              ],
-              "type": {
-                "type": "intrinsic",
-                "name": "string"
-              }
-            },
-            {
-              "id": 4,
-              "name": "fakeProtectedVariable",
-              "kind": 1024,
-              "kindString": "Property",
-              "flags": {
-                "isExported": true,
-                "isProtected": true
-              },
-              "comment": {
-                "shortText": "A variable that is made protected via comment."
-              },
-              "sources": [
-                {
-                  "fileName": "access.ts",
-                  "line": 41,
-                  "character": 25
-                }
-              ],
-              "type": {
-                "type": "intrinsic",
-                "name": "string"
-              }
-            },
-            {
               "id": 5,
               "name": "fakePrivateFunction",
               "kind": 2048,
@@ -144,23 +96,71 @@
                   "character": 25
                 }
               ]
+            },
+            {
+              "id": 3,
+              "name": "fakePrivateVariable",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {
+                "isPrivate": true,
+                "isExported": true
+              },
+              "comment": {
+                "shortText": "A variable that is made private via comment."
+              },
+              "sources": [
+                {
+                  "fileName": "access.ts",
+                  "line": 35,
+                  "character": 23
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "string"
+              }
+            },
+            {
+              "id": 4,
+              "name": "fakeProtectedVariable",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {
+                "isExported": true,
+                "isProtected": true
+              },
+              "comment": {
+                "shortText": "A variable that is made protected via comment."
+              },
+              "sources": [
+                {
+                  "fileName": "access.ts",
+                  "line": 41,
+                  "character": 25
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "string"
+              }
             }
           ],
           "groups": [
-            {
-              "title": "Constants",
-              "kind": 1024,
-              "children": [
-                3,
-                4
-              ]
-            },
             {
               "title": "Methods",
               "kind": 2048,
               "children": [
                 5,
                 7
+              ]
+            },
+            {
+              "title": "Constants",
+              "kind": 1024,
+              "children": [
+                3,
+                4
               ]
             }
           ],

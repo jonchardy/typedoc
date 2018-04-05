@@ -27,12 +27,12 @@ export class GroupPlugin extends ConverterComponent {
 
         ReflectionKind.Constructor,
         ReflectionKind.Event,
-        ReflectionKind.Property,
         ReflectionKind.Variable,
         ReflectionKind.Function,
         ReflectionKind.Accessor,
         ReflectionKind.Method,
         ReflectionKind.ObjectLiteral,
+        ReflectionKind.Property,
 
         ReflectionKind.Parameter,
         ReflectionKind.TypeParameter,

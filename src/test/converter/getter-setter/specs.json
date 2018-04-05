@@ -22,26 +22,6 @@
           "flags": {},
           "children": [
             {
-              "id": 3,
-              "name": "_name",
-              "kind": 1024,
-              "kindString": "Property",
-              "flags": {
-                "isPrivate": true
-              },
-              "sources": [
-                {
-                  "fileName": "getter-setter.ts",
-                  "line": 3,
-                  "character": 17
-                }
-              ],
-              "type": {
-                "type": "intrinsic",
-                "name": "string"
-              }
-            },
-            {
               "id": 4,
               "name": "name",
               "kind": 262144,
@@ -165,16 +145,29 @@
                   "character": 21
                 }
               ]
+            },
+            {
+              "id": 3,
+              "name": "_name",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {
+                "isPrivate": true
+              },
+              "sources": [
+                {
+                  "fileName": "getter-setter.ts",
+                  "line": 3,
+                  "character": 17
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "string"
+              }
             }
           ],
           "groups": [
-            {
-              "title": "Constants",
-              "kind": 1024,
-              "children": [
-                3
-              ]
-            },
             {
               "title": "Properties",
               "kind": 262144,
@@ -182,6 +175,13 @@
                 4,
                 8,
                 10
+              ]
+            },
+            {
+              "title": "Constants",
+              "kind": 1024,
+              "children": [
+                3
               ]
             }
           ],

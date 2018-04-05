@@ -110,6 +110,37 @@ export class Renderer extends ChildableComponent<Application, RendererComponent>
     })
     toc: string[];
 
+    @Option({
+        name: 'hideGoJSNav',
+        help: 'Do not print the GoJS site navigation at the top of the page.',
+        type: ParameterType.Boolean
+    })
+    hideGoJSNav: boolean;
+
+    @Option({
+        name: 'indexTitle',
+        help: 'Sets the title to be displayed for the index and navigation.',
+        type: ParameterType.String,
+        defaultValue: 'Index'
+    })
+    indexTitle: string;
+
+    @Option({
+        name: 'topCopyright',
+        help: 'Sets the information to display in the top copyright before the version number.',
+        type: ParameterType.String,
+        defaultValue: ''
+    })
+    topCopyright: string;
+
+    @Option({
+        name: 'showInheritedDefault',
+        help: 'TODO',
+        type: ParameterType.Boolean,
+        defaultValue: false
+    })
+    showInheritedDefault: boolean;
+
     /**
      * Create a new Renderer instance.
      *

@@ -87,6 +87,37 @@
               ]
             },
             {
+              "id": 9,
+              "name": "getValue",
+              "kind": 2048,
+              "kindString": "Method",
+              "flags": {},
+              "signatures": [
+                {
+                  "id": 10,
+                  "name": "getValue",
+                  "kind": 4096,
+                  "kindString": "Call signature",
+                  "flags": {},
+                  "comment": {
+                    "shortText": "getValue short text.",
+                    "returns": "Return value comment.\n"
+                  },
+                  "type": {
+                    "type": "typeParameter",
+                    "name": "T"
+                  }
+                }
+              ],
+              "sources": [
+                {
+                  "fileName": "generic-class.ts",
+                  "line": 28,
+                  "character": 12
+                }
+              ]
+            },
+            {
               "id": 4,
               "name": "value",
               "kind": 1024,
@@ -134,37 +165,6 @@
                   "name": "T"
                 }
               }
-            },
-            {
-              "id": 9,
-              "name": "getValue",
-              "kind": 2048,
-              "kindString": "Method",
-              "flags": {},
-              "signatures": [
-                {
-                  "id": 10,
-                  "name": "getValue",
-                  "kind": 4096,
-                  "kindString": "Call signature",
-                  "flags": {},
-                  "comment": {
-                    "shortText": "getValue short text.",
-                    "returns": "Return value comment.\n"
-                  },
-                  "type": {
-                    "type": "typeParameter",
-                    "name": "T"
-                  }
-                }
-              ],
-              "sources": [
-                {
-                  "fileName": "generic-class.ts",
-                  "line": 28,
-                  "character": 12
-                }
-              ]
             }
           ],
           "groups": [
@@ -176,18 +176,18 @@
               ]
             },
             {
+              "title": "Methods",
+              "kind": 2048,
+              "children": [
+                9
+              ]
+            },
+            {
               "title": "Constants",
               "kind": 1024,
               "children": [
                 4,
                 5
-              ]
-            },
-            {
-              "title": "Methods",
-              "kind": 2048,
-              "children": [
-                9
               ]
             }
           ],
@@ -277,6 +277,47 @@
               }
             },
             {
+              "id": 17,
+              "name": "getValue",
+              "kind": 2048,
+              "kindString": "Method",
+              "flags": {},
+              "signatures": [
+                {
+                  "id": 18,
+                  "name": "getValue",
+                  "kind": 4096,
+                  "kindString": "Call signature",
+                  "flags": {},
+                  "comment": {
+                    "shortText": "getValue short text.",
+                    "returns": "Return value comment.\n"
+                  },
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "string"
+                  },
+                  "inheritedFrom": {
+                    "type": "reference",
+                    "name": "GenericClass.getValue",
+                    "id": 9
+                  }
+                }
+              ],
+              "sources": [
+                {
+                  "fileName": "generic-class.ts",
+                  "line": 28,
+                  "character": 12
+                }
+              ],
+              "inheritedFrom": {
+                "type": "reference",
+                "name": "GenericClass.getValue",
+                "id": 9
+              }
+            },
+            {
               "id": 12,
               "name": "value",
               "kind": 1024,
@@ -334,47 +375,6 @@
                 "name": "GenericClass.values",
                 "id": 5
               }
-            },
-            {
-              "id": 17,
-              "name": "getValue",
-              "kind": 2048,
-              "kindString": "Method",
-              "flags": {},
-              "signatures": [
-                {
-                  "id": 18,
-                  "name": "getValue",
-                  "kind": 4096,
-                  "kindString": "Call signature",
-                  "flags": {},
-                  "comment": {
-                    "shortText": "getValue short text.",
-                    "returns": "Return value comment.\n"
-                  },
-                  "type": {
-                    "type": "intrinsic",
-                    "name": "string"
-                  },
-                  "inheritedFrom": {
-                    "type": "reference",
-                    "name": "GenericClass.getValue",
-                    "id": 9
-                  }
-                }
-              ],
-              "sources": [
-                {
-                  "fileName": "generic-class.ts",
-                  "line": 28,
-                  "character": 12
-                }
-              ],
-              "inheritedFrom": {
-                "type": "reference",
-                "name": "GenericClass.getValue",
-                "id": 9
-              }
             }
           ],
           "groups": [
@@ -386,18 +386,18 @@
               ]
             },
             {
+              "title": "Methods",
+              "kind": 2048,
+              "children": [
+                17
+              ]
+            },
+            {
               "title": "Constants",
               "kind": 1024,
               "children": [
                 12,
                 13
-              ]
-            },
-            {
-              "title": "Methods",
-              "kind": 2048,
-              "children": [
-                17
               ]
             }
           ],
