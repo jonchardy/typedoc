@@ -3,7 +3,7 @@ import * as FS from 'fs';
 import * as _ from 'lodash';
 
 import { Component, Option } from '../../component';
-import { OptionsComponent, DiscoverEvent } from '../options';
+import { OptionsComponent, OptionsReadMode, DiscoverEvent } from '../options';
 import { ParameterType, ParameterHint } from '../declaration';
 
 @Component({name: 'options:typedoc'})
@@ -22,10 +22,15 @@ export class TypedocReader extends OptionsComponent {
     private static OPTIONS_KEY = 'options';
 
     initialize() {
-        this.listenTo(this.owner, DiscoverEvent.DISCOVER, this.onDiscover, -100);
+        this.listenTo(this.owner, DiscoverEvent.DISCOVER, this.onDiscover, -150);
     }
 
     onDiscover(event: DiscoverEvent) {
+        // Do nothing until were fetching options
+        if (event.mode !== OptionsReadMode.Fetch) {
+            return;
+        }
+
         if (TypedocReader.OPTIONS_KEY in event.data) {
             this.load(event, Path.resolve(event.data[TypedocReader.OPTIONS_KEY]));
         } else if (this.application.isCLI) {

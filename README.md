@@ -67,13 +67,17 @@ in order to change the behaviour of TypeDoc.
   Prevent externally resolved TypeScript files from being documented.
 * `--excludePrivate`<br>
   Prevent private members from being included in the generated documentation.
+* `--excludeProtected`<br>
+  Prevent protected members from being included in the generated documentation.
 
 #### TypeScript compiler
 * `--module <commonjs, amd, system or umd>`<br>
   Specify module code generation: "commonjs", "amd", "system" or "umd".
 * `--target <ES3, ES5, or ES6>`<br>
   Specify ECMAScript target version: "ES3" (default), "ES5" or "ES6"
-
+* `--tsconfig <path/to/tsconfig.json>`<br>
+  Specify a typescript config file that should be loaded. If not specified TypeDoc will look for 'tsconfig.json' in the current directory.
+  
 #### Theming
 * `--theme <default|minimal|path/to/theme>`<br>
   Specify the path to the theme that should be used.
@@ -131,6 +135,8 @@ There is a plugin available to run TypeDoc with Grunt created by Bart van der Sc
 
 * [External Module Name](https://github.com/christopherthielen/typedoc-plugin-external-module-name) - Set the name of TypeDoc external modules
 * [Sourcefile URL](https://github.com/gdelmas/typedoc-plugin-sourcefile-url) - Set custom source file URL links
+* [Internal/External Module](https://github.com/christopherthielen/typedoc-plugin-internal-external) - Explicitly mark modules as `@internal` or `@external`
+* [Single Line Tags](https://github.com/christopherthielen/typedoc-plugin-single-line-tags) - Process certain `@tags` as single lines
 
 ## Advanced guides and docs
 
@@ -148,5 +154,5 @@ You can find TypeDoc on GitHub; feel free to start an issue or create a pull req
 ## License
 
 Copyright (c) 2015 [Sebastian Lenz](http://typedoc.org).<br>
-Copyright (c) 2016-2017 [TypeDoc Contributors](https://github.com/TypeStrong/typedoc/graphs/contributors).<br>
+Copyright (c) 2016-2018 [TypeDoc Contributors](https://github.com/TypeStrong/typedoc/graphs/contributors).<br>
 Licensed under the Apache License 2.0.
