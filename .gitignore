@@ -16,3 +16,4 @@ yarn.lock
 /dist/
 /test/
 /src/test
+package-lock.json

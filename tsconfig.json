@@ -10,12 +10,14 @@
     ],
     "target": "es5",
     "noImplicitAny": false,
+    "strictFunctionTypes": true,
     "removeComments": true,
     "noUnusedLocals": true,
     "preserveConstEnums": true,
     "outDir": "dist/",
     "rootDir": "src/",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "newLine": "LF"
   },
   "include": [
     "src/**/*.ts"

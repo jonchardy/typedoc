@@ -116,9 +116,8 @@ export class ImplementsPlugin extends ConverterComponent {
                     return;
                 }
 
-                const source = <DeclarationReflection> (<ReferenceType> type).reflection;
-                if (source && source.kindOf(ReflectionKind.Interface)) {
-                    this.analyzeClass(context, reflection, source);
+                if (type.reflection && type.reflection.kindOf(ReflectionKind.Interface)) {
+                    this.analyzeClass(context, reflection, <DeclarationReflection> type.reflection);
                 }
             });
             // Remove the types marked as undocumented
