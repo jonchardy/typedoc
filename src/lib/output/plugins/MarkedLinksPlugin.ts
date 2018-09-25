@@ -62,7 +62,7 @@ export class MarkedLinksPlugin extends ContextAwareRendererComponent {
     private replaceBrackets(text: string): string {
         return text.replace(this.brackets, (match: string, content: string): string => {
             const split = MarkedLinksPlugin.splitLinkText(content);
-            return this.buildLink(match, split.target, split.caption);
+            return this.buildLink(match, split.target, split.caption, false);
         });
     }
 
@@ -74,9 +74,10 @@ export class MarkedLinksPlugin extends ContextAwareRendererComponent {
      */
     private replaceInlineTags(text: string): string {
         return text.replace(this.inlineTag, (match: string, leading: string, tagName: string, content: string): string => {
-            const split   = MarkedLinksPlugin.splitLinkText(content);
-            let target  = split.target;
+            const split = MarkedLinksPlugin.splitLinkText(content);
+            let target = split.target;
             let caption = leading || split.caption;
+            let searchUp = false;
 
             // Convert any JSDoc-style @link syntax, not fully featured: https://github.com/TypeStrong/typedoc/issues/488
             if (this.jsDocLinks) {
@@ -93,6 +94,9 @@ export class MarkedLinksPlugin extends ContextAwareRendererComponent {
                 target = target.replace(/#/, '.');
                 if (target.charAt(0) === '.') {
                     target = target.slice(1);
+                    // If this link starts with #, it means we're looking for something within this class,
+                    // so we'll also look in the superclasses since it could be inherited
+                    searchUp = true;
                 }
             }
 
@@ -104,7 +108,7 @@ export class MarkedLinksPlugin extends ContextAwareRendererComponent {
                 monospace = false;
             }
 
-            return this.buildLink(match, target, caption, monospace);
+            return this.buildLink(match, target, caption, searchUp, monospace);
         });
     }
 
@@ -117,14 +121,15 @@ export class MarkedLinksPlugin extends ContextAwareRendererComponent {
      * @param monospace  Whether to use monospace formatting or not.
      * @returns A html link tag.
      */
-    private buildLink(original: string, target: string, caption: string, monospace?: boolean): string {
+    private buildLink(original: string, target: string, caption: string, searchUp: boolean, monospace?: boolean): string {
         let attributes = '';
+
         if (this.urlPrefix.test(target)) {
             attributes = ' class="external"';
         } else {
             let reflection: Reflection;
             if (this.reflection) {
-                reflection = this.reflection.findReflectionByName(target);
+                reflection = this.reflection.findReflectionByName(target, searchUp);
             } else if (this.project) {
                 reflection = this.project.findReflectionByName(target);
             }

@@ -100,7 +100,7 @@ export class ProjectReflection extends ContainerReflection {
      */
     findReflectionByName(arg: any): Reflection {
         const names: string[] = Array.isArray(arg) ? arg : arg.split('.');
-        let name = names.pop();
+        let name = names[names.length - 1];
         // Did the @link tag use static syntax?
         let staticLink = false;
         if (name.indexOf('@static-') === 0) {
@@ -113,8 +113,11 @@ export class ProjectReflection extends ContainerReflection {
             if (reflection.name !== name || (staticLink && !reflection.flags.isStatic)) {
                 continue;
             }
+            if (names.length === 1 && reflection.parent !== this) {
+                continue; // looking for top-level reflection, this one has non-root parent
+            }
 
-            let depth = names.length - 1;
+            let depth = names.length - 2;
             let target = reflection;
             while (target && depth >= 0) {
                 target = target.parent;

@@ -30,9 +30,10 @@ export class GroupPlugin extends ConverterComponent {
         ReflectionKind.Variable,
         ReflectionKind.Function,
         ReflectionKind.Accessor,
-        ReflectionKind.Method,
-        ReflectionKind.ObjectLiteral,
         ReflectionKind.Property,
+        ReflectionKind.Method,
+        ReflectionKind.Constant,
+        ReflectionKind.ObjectLiteral,
 
         ReflectionKind.Parameter,
         ReflectionKind.TypeParameter,
@@ -60,11 +61,12 @@ export class GroupPlugin extends ConverterComponent {
     static PLURALS = (function() {
         const plurals = {};
         plurals[ReflectionKind.Class]      = 'Classes';
-        plurals[ReflectionKind.Property]   = 'Constants';
+        plurals[ReflectionKind.Property]   = 'Properties';
         plurals[ReflectionKind.Enum]       = 'Enumerations';
         plurals[ReflectionKind.EnumMember] = 'Enumeration members';
         plurals[ReflectionKind.TypeAlias]  = 'Type aliases';
         plurals[ReflectionKind.Accessor]   = 'Properties';
+        plurals[ReflectionKind.Constant]   = 'Constants';
         return plurals;
     })();
 
@@ -227,13 +229,14 @@ export class GroupPlugin extends ConverterComponent {
         const aWeight = GroupPlugin.WEIGHTS.indexOf(a.kind);
         const bWeight = GroupPlugin.WEIGHTS.indexOf(b.kind);
         if (aWeight === bWeight) {
-            if (a.flags.isStatic && !b.flags.isStatic) {
-                return 1;
-            }
-            if (!a.flags.isStatic && b.flags.isStatic) {
-                return -1;
-            }
             if (a.name === b.name) {
+                // Same name? Instance first
+                if (a.flags.isStatic && !b.flags.isStatic) {
+                    return 1;
+                }
+                if (!a.flags.isStatic && b.flags.isStatic) {
+                    return -1;
+                }
                 return 0;
             }
             return a.name > b.name ? 1 : -1;

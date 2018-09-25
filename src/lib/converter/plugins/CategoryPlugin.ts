@@ -1,4 +1,4 @@
-import { Reflection } from '../../models/reflections/index';
+import { Reflection, ReflectionFlag } from '../../models/reflections/index';
 import { ReflectionCategory } from '../../models/ReflectionCategory';
 import { SourceDirectory } from '../../models/sources/directory';
 import { Component, ConverterComponent } from '../components';
@@ -54,8 +54,8 @@ export class CategoryPlugin extends ConverterComponent {
         if (project.children && project.children.length > 0) {
             project.children.sort(CategoryPlugin.sortCallback);
             project.categories = CategoryPlugin.getReflectionCategories(project.children);
+            project.categories.sort(CategoryPlugin.sortCatCallback);
         }
-        project.categories.sort(CategoryPlugin.sortCatCallback);
 
         walkDirectory(project.directory);
         project.files.forEach((file) => {
@@ -73,6 +73,13 @@ export class CategoryPlugin extends ConverterComponent {
         const categories: ReflectionCategory[] = [];
         reflections.forEach((child) => {
             const childCat = CategoryPlugin.getCategory(child);
+            if (childCat.indexOf('Extension') >= 0) {
+                child.setFlag(ReflectionFlag.Extension);
+            }
+            if (childCat.indexOf('Storage') >= 0) {
+                child.setFlag(ReflectionFlag.Storage);
+            }
+
             for (let i = 0; i < categories.length; i++) {
                 const category = categories[i];
 
@@ -104,7 +111,9 @@ export class CategoryPlugin extends ConverterComponent {
                 for (let i = 0; i < tags.length; i++) {
                     if (tags[i].tagName === 'category') {
                         let tag = tags[i].text;
-                        return (tag.charAt(0).toUpperCase() + tag.slice(1).toLowerCase()).trim();
+                        return tag.replace(/\w\S*/g, function(txt) {
+                            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                        }).trim();
                     }
                 }
             }
@@ -134,6 +143,12 @@ export class CategoryPlugin extends ConverterComponent {
         const aWeight = CategoryPlugin.WEIGHTS.indexOf(a.title);
         const bWeight = CategoryPlugin.WEIGHTS.indexOf(b.title);
         if (aWeight < 0 && bWeight < 0) {
+            if (a.title.indexOf('Storage') >= 0) {
+                return 1;
+            }
+            if (b.title.indexOf('Storage') >= 0) {
+                return -1;
+            }
             return a.title > b.title ? 1 : -1;
         }
         if (aWeight < 0) {

@@ -115,6 +115,16 @@ export class CommentPlugin extends ConverterComponent {
             }
             this.hidden.push(reflection);
         }
+
+        if (comment.hasTag('expose')) {
+            reflection.setFlag(ReflectionFlag.Virtual, true);
+            CommentPlugin.removeTags(comment, 'expose');
+        }
+
+        if (comment.hasTag('override')) {
+            reflection.setFlag(ReflectionFlag.Override, true);
+            CommentPlugin.removeTags(comment, 'override');
+        }
     }
 
     /**

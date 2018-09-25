@@ -30,6 +30,11 @@ export function createDeclaration(context: Context, node: ts.Node, kind: Reflect
         throw new Error('Expected container reflection.');
     }
 
+    // CUSTOM: only show inherited members when excludeInherited === false
+    if (context.isInherit && context.converter.excludeInherited) {
+        return null;
+    }
+
     // Ensure we have a name for the reflection
     if (!name) {
         if (node.localSymbol) {

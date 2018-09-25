@@ -104,8 +104,15 @@ export class ImplementsPlugin extends ConverterComponent {
      */
     private onResolve(context: Context, reflection: DeclarationReflection) {
         if (reflection.kindOf(ReflectionKind.Class) && reflection.implementedTypes) {
+            const removeList = [];
             reflection.implementedTypes.forEach((type: Type) => {
                 if (!(type instanceof ReferenceType)) {
+                    return;
+                }
+
+                // If the implemented type isn't documented, mark it for removal from the list
+                if (type.reflection === undefined) {
+                    removeList.push(type);
                     return;
                 }
 
@@ -114,6 +121,8 @@ export class ImplementsPlugin extends ConverterComponent {
                     this.analyzeClass(context, reflection, source);
                 }
             });
+            // Remove the types marked as undocumented
+            reflection.implementedTypes = reflection.implementedTypes.filter(elt => removeList.indexOf(elt) < 0);
         }
     }
 }

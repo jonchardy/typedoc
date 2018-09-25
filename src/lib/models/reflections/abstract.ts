@@ -37,26 +37,27 @@ export enum ReflectionKind {
     ExternalModule = 1,
     Module = 2,
     Enum = 4,
-    EnumMember = 16,
-    Variable = 32,
-    Function = 64,
-    Class = 128,
-    Interface = 256,
-    Constructor = 512,
-    Property = 1024,
-    Method = 2048,
-    CallSignature = 4096,
-    IndexSignature = 8192,
-    ConstructorSignature = 16384,
-    Parameter = 32768,
-    TypeLiteral = 65536,
-    TypeParameter = 131072,
-    Accessor = 262144,
-    GetSignature = 524288,
-    SetSignature = 1048576,
-    ObjectLiteral = 2097152,
-    TypeAlias = 4194304,
-    Event = 8388608,
+    EnumMember = 8,
+    Variable = 16,
+    Function = 32,
+    Class = 64,
+    Interface = 128,
+    Constructor = 256,
+    Property = 512,
+    Method = 1024,
+    CallSignature = 2048,
+    IndexSignature = 4096,
+    ConstructorSignature = 8192,
+    Parameter = 16384,
+    TypeLiteral = 32768,
+    TypeParameter = 65536,
+    Accessor = 131072,
+    GetSignature = 262144,
+    SetSignature = 524288,
+    ObjectLiteral = 1048576,
+    TypeAlias = 2097152,
+    Event = 4194304,
+    Constant = 8388608,
 
     ClassOrInterface = Class | Interface,
     VariableOrProperty = Variable | Property,
@@ -79,7 +80,11 @@ export enum ReflectionFlag {
     ConstructorProperty = 1024,
     Abstract = 2048,
     Const = 4096,
-    Let = 8192
+    Let = 8192,
+    Virtual = 16384,
+    Override = 32768,
+    Extension = 65536,
+    Storage = 131072
 }
 
 const relevantFlags: ReflectionFlag[] = [
@@ -92,7 +97,11 @@ const relevantFlags: ReflectionFlag[] = [
     ReflectionFlag.Rest,
     ReflectionFlag.Abstract,
     ReflectionFlag.Let,
-    ReflectionFlag.Const
+    ReflectionFlag.Const,
+    ReflectionFlag.Virtual,
+    ReflectionFlag.Override,
+    ReflectionFlag.Extension,
+    ReflectionFlag.Storage
 ];
 
 export interface ReflectionFlags extends Array<string> {
@@ -152,6 +161,14 @@ export interface ReflectionFlags extends Array<string> {
     isConst?: boolean;
 
     isLet?: boolean;
+
+    isVirtual?: boolean;
+
+    isOverride?: boolean;
+
+    isExtension?: boolean;
+
+    isStorage?: boolean;
 }
 
 export interface DefaultValueContainer extends Reflection {
@@ -425,6 +442,18 @@ export abstract class Reflection {
                 break;
             case ReflectionFlag.Const:
                 this.flags.isConst = value;
+                break;
+            case ReflectionFlag.Virtual:
+                this.flags.isVirtual = value;
+                break;
+            case ReflectionFlag.Override:
+                this.flags.isOverride = value;
+                break;
+            case ReflectionFlag.Extension:
+                this.flags.isExtension = value;
+                break;
+            case ReflectionFlag.Storage:
+                this.flags.isStorage = value;
                 break;
         }
     }

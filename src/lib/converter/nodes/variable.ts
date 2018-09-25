@@ -59,7 +59,14 @@ export class VariableConverter extends ConverterNodeComponent<ts.VariableDeclara
         }
 
         const scope = context.scope;
-        const kind = scope.kind & ReflectionKind.ClassOrInterface ? ReflectionKind.Property : ReflectionKind.Variable;
+        let kind = ReflectionKind.Variable;
+        if (scope.kind & ReflectionKind.ClassOrInterface) {
+            if (comment && comment.hasTag('constant')) {
+                kind = ReflectionKind.Constant;
+            } else {
+                kind = ReflectionKind.Property;
+            }
+        }
         const variable = createDeclaration(context, node, kind, name);
 
         // The variable can be null if `excludeNotExported` is `true`
