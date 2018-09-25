@@ -9,11 +9,10 @@ yarn.lock
 
 /tmp/
 /etc/
-/examples/*/doc
-/examples/definitely-typed/src/
-/examples/plottable/src/
-/examples/doppio/src/
+/examples/
 /node_modules/
 /typescript/
 /coverage/
 /dist/
+/test/
+/src/test
