@@ -1,7 +1,7 @@
 import * as ts from 'typescript';
 
 import { Reflection, ReflectionKind } from '../../models/index';
-import { createDeclaration, createSignature } from '../factories/index';
+import { createComment, createDeclaration, createSignature } from '../factories/index';
 import { Context } from '../context';
 import { Component, ConverterNodeComponent } from '../components';
 
@@ -23,16 +23,29 @@ export class AccessorConverter extends ConverterNodeComponent<ts.SignatureDeclar
      * @return The resulting reflection or NULL.
      */
     convert(context: Context, node: ts.SignatureDeclaration): Reflection | undefined {
-        const accessor = createDeclaration(context, node, ReflectionKind.Accessor);
+        // CUSTOM: Need to handle @constant accessors (PanelLayout)
+        const comment = createComment(node);
+        const scope = context.scope;
+        let kind = ReflectionKind.Accessor;
+        if (scope.kind & ReflectionKind.ClassOrInterface) {
+            if (comment && comment.hasTag('constant')) {
+                kind = ReflectionKind.Constant;
+            }
+        }
+        const declaration = createDeclaration(context, node, kind);
 
-        context.withScope(accessor, () => {
-            if (node.kind === ts.SyntaxKind.GetAccessor) {
-                accessor!.getSignature = createSignature(context, node, '__get', ReflectionKind.GetSignature);
+        context.withScope(declaration, () => {
+            if (kind === ReflectionKind.Constant) {
+                declaration!.type = this.owner.convertType(context, node.type, context.getTypeAtLocation(node));
             } else {
-                accessor!.setSignature = createSignature(context, node, '__set', ReflectionKind.SetSignature);
+                if (node.kind === ts.SyntaxKind.GetAccessor) {
+                    declaration!.getSignature = createSignature(context, node, '__get', ReflectionKind.GetSignature);
+                } else {
+                    declaration!.setSignature = createSignature(context, node, '__set', ReflectionKind.SetSignature);
+                }
             }
         });
 
-        return accessor;
+        return declaration;
     }
 }

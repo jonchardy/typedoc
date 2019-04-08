@@ -1,7 +1,6 @@
 import * as Path from 'path';
 
 import { DeclarationReflection, ProjectReflection } from '../../models/reflections/index';
-import { GroupPlugin } from '../../converter/plugins/GroupPlugin';
 import { Component, RendererComponent } from '../components';
 import { writeFile } from '../../utils/fs';
 import { RendererEvent } from '../events';
@@ -27,7 +26,6 @@ export class JavascriptIndexPlugin extends RendererComponent {
      */
     private onRendererBegin(event: RendererEvent) {
         const rows: any[] = [];
-        const kinds = {};
 
         for (let key in event.project.reflections) {
             const reflection: DeclarationReflection = <DeclarationReflection> event.project.reflections[key];
@@ -49,18 +47,15 @@ export class JavascriptIndexPlugin extends RendererComponent {
 
             const row: any = {
                 id: rows.length,
-                kind:    reflection.kind,
-                name:    reflection.name,
-                url:     reflection.url,
+                kind: reflection.kind,
+                fullName: reflection.name,
+                url: reflection.url,
                 classes: reflection.cssClasses
             };
 
             if (parent) {
                 row.parent = parent.getFullName();
-            }
-
-            if (!kinds[reflection.kind]) {
-                kinds[reflection.kind] = GroupPlugin.getKindSingular(reflection.kind);
+                row.fullName = `${row.parent}.${reflection.name}`;
             }
 
             rows.push(row);
@@ -68,9 +63,10 @@ export class JavascriptIndexPlugin extends RendererComponent {
 
         const fileName = Path.join(event.outputDirectory, 'assets', 'js', 'search.js');
         const data =
-            `var typedoc = typedoc || {};
+            `/* Copyright (C) 1998-2019 by Northwoods Software Corporation. All Rights Reserved. */
+            var typedoc = typedoc || {};
             typedoc.search = typedoc.search || {};
-            typedoc.search.data = ${JSON.stringify({kinds: kinds, rows: rows})};`;
+            typedoc.search.data = ${JSON.stringify(rows)};`;
 
         writeFile(fileName, data, false);
     }

@@ -39,11 +39,6 @@ export function createDeclaration(context: Context, node: ts.Declaration, kind: 
     }
     const container = context.scope;
 
-    // CUSTOM: only show inherited members when excludeInherited === false
-    if (context.isInherit && context.converter.excludeInherited) {
-        return null;
-    }
-
     // Ensure we have a name for the reflection
     if (!name) {
         if (node.localSymbol) {
@@ -106,6 +101,21 @@ export function createDeclaration(context: Context, node: ts.Declaration, kind: 
             child = n;
         }
     });
+
+    // CUSTOM:
+    // For inherited members...
+    // if the declaration already exists, mark it as an override (except constructors);
+    // only show inherited members when excludeInherited === false
+    if (context.isInherit) {
+        if (child && child.kind !== ReflectionKind.Constructor &&
+            context.inherited && context.inherited.indexOf(name) !== -1 &&
+            (node.parent === context.inheritParent || isConstructorProperty)) {
+            child.setFlag(ReflectionFlag.Override, true);
+        }
+        if (context.converter.excludeInherited) {
+            return;
+        }
+    }
 
     if (!child) {
         // Child does not exist, create a new reflection

@@ -121,11 +121,6 @@ export class CommentPlugin extends ConverterComponent {
             reflection.setFlag(ReflectionFlag.Virtual, true);
             CommentPlugin.removeTags(comment, 'expose');
         }
-
-        if (comment.hasTag('override')) {
-            reflection.setFlag(ReflectionFlag.Override, true);
-            CommentPlugin.removeTags(comment, 'override');
-        }
     }
 
     /**
