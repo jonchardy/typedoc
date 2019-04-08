@@ -26,14 +26,14 @@ export class MarkedLinksPlugin extends ContextAwareRendererComponent {
         help: 'Emits a list of broken symbol [[navigation]] links after documentation generation',
         type: ParameterType.Boolean
     })
-    listInvalidSymbolLinks: boolean;
+    listInvalidSymbolLinks!: boolean;
 
     @Option({
         name: 'jsDocLinks',
         help: 'Parse JSDoc-style @link inline tags.',
         type: ParameterType.Boolean
     })
-    jsDocLinks: boolean;
+    jsDocLinks!: boolean;
 
     private warnings: string[] = [];
 
@@ -45,7 +45,7 @@ export class MarkedLinksPlugin extends ContextAwareRendererComponent {
         this.listenTo(this.owner, {
             [MarkdownEvent.PARSE]: this.onParseMarkdown,
             [RendererEvent.END]: this.onEndRenderer
-        }, null, 100);
+        }, undefined, 100);
     }
 
     /**
@@ -77,6 +77,7 @@ export class MarkedLinksPlugin extends ContextAwareRendererComponent {
             const split = MarkedLinksPlugin.splitLinkText(content);
             let target = split.target;
             let caption = leading || split.caption;
+            const monospace = tagName === 'linkcode';
             let searchUp = false;
 
             // Convert any JSDoc-style @link syntax, not fully featured: https://github.com/TypeStrong/typedoc/issues/488
@@ -100,14 +101,6 @@ export class MarkedLinksPlugin extends ContextAwareRendererComponent {
                 }
             }
 
-            let monospace: boolean;
-            if (tagName === 'linkcode') {
-                monospace = true;
-            }
-            if (tagName === 'linkplain') {
-                monospace = false;
-            }
-
             return this.buildLink(match, target, caption, searchUp, monospace);
         });
     }
@@ -127,7 +120,7 @@ export class MarkedLinksPlugin extends ContextAwareRendererComponent {
         if (this.urlPrefix.test(target)) {
             attributes = ' class="external"';
         } else {
-            let reflection: Reflection;
+            let reflection: Reflection | undefined;
             if (this.reflection) {
                 reflection = this.reflection.findReflectionByName(target, searchUp);
             } else if (this.project) {
@@ -142,8 +135,8 @@ export class MarkedLinksPlugin extends ContextAwareRendererComponent {
                     target = this.getRelativeUrl(reflection.url);
                 }
             } else {
-                reflection = this.reflection || this.project;
-                this.warnings.push(`In ${reflection.getFullName()}: ${original}`);
+                const fullName = (this.reflection || this.project)!.getFullName();
+                this.warnings.push(`In ${fullName}: ${original}`);
                 return original;
             }
         }
