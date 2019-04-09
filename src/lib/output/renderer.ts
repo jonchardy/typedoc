@@ -115,7 +115,7 @@ export class Renderer extends ChildableComponent<Application, RendererComponent>
         help: 'Do not print the GoJS site navigation at the top of the page.',
         type: ParameterType.Boolean
     })
-    hideGoJSNav: boolean;
+    hideGoJSNav!: boolean;
 
     @Option({
         name: 'indexTitle',
@@ -123,7 +123,7 @@ export class Renderer extends ChildableComponent<Application, RendererComponent>
         type: ParameterType.String,
         defaultValue: 'Index'
     })
-    indexTitle: string;
+    indexTitle!: string;
 
     @Option({
         name: 'topCopyright',
@@ -131,7 +131,7 @@ export class Renderer extends ChildableComponent<Application, RendererComponent>
         type: ParameterType.String,
         defaultValue: ''
     })
-    topCopyright: string;
+    topCopyright!: string;
 
     @Option({
         name: 'showInheritedDefault',
@@ -139,7 +139,7 @@ export class Renderer extends ChildableComponent<Application, RendererComponent>
         type: ParameterType.Boolean,
         defaultValue: false
     })
-    showInheritedDefault: boolean;
+    showInheritedDefault!: boolean;
 
     /**
      * Create a new Renderer instance.

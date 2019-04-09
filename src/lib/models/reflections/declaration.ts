@@ -159,12 +159,12 @@ export class DeclarationReflection extends ContainerReflection implements Defaul
      *
      * @return The found reflection or null.
      */
-    findReflectionByName(arg: any, searchUp?: boolean): Reflection {
+    findReflectionByName(arg: any, searchUp?: boolean): Reflection | undefined {
         const names: string[] = Array.isArray(arg) ? arg : arg.split('.');
 
         function walkTypeParents(child: DeclarationReflection) {
             let parents = child.extendedTypes;
-            if (parents !== null) {
+            if (parents) {
                 let firstParent = parents[0] as ReferenceType;
                 let parentReflection = firstParent.reflection as DeclarationReflection;
                 if (parentReflection) {
@@ -187,7 +187,12 @@ export class DeclarationReflection extends ContainerReflection implements Defaul
                     return inheritedReflection;
                 }
             }
-            return this.parent.findReflectionByName(names);
+            if (this.parent) {
+                const ref = this.parent.findReflectionByName(names);
+                if (ref) {
+                    return ref;
+                }
+            }
         }
     }
 

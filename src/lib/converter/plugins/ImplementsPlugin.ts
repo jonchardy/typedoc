@@ -104,7 +104,7 @@ export class ImplementsPlugin extends ConverterComponent {
      */
     private onResolve(context: Context, reflection: DeclarationReflection) {
         if (reflection.kindOf(ReflectionKind.Class) && reflection.implementedTypes) {
-            const removeList = [];
+            const removeList: ReferenceType[] = [];
             reflection.implementedTypes.forEach((type: Type) => {
                 if (!(type instanceof ReferenceType)) {
                     return;
@@ -121,7 +121,7 @@ export class ImplementsPlugin extends ConverterComponent {
                 }
             });
             // Remove the types marked as undocumented
-            reflection.implementedTypes = reflection.implementedTypes.filter(elt => removeList.indexOf(elt) < 0);
+            reflection.implementedTypes = reflection.implementedTypes.filter(elt => removeList.indexOf(elt as ReferenceType) < 0);
         }
     }
 }

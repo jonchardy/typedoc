@@ -112,7 +112,8 @@ export class ProjectReflection extends ContainerReflection {
                 continue; // looking for top-level reflection, this one has non-root parent
             }
 
-            let depth = names.length - 1;
+            // CUSTOM: We don't use namespace/module, so depth is 1 less than normal
+            let depth = names.length - 2;
             let target: Reflection | undefined = reflection;
             while ((target = target.parent) && depth >= 0) {
                 if (target.name !== names[depth]) {

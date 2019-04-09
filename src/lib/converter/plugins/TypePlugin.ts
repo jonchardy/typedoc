@@ -146,7 +146,7 @@ export class TypePlugin extends ConverterComponent {
 
             function walkTypeParents(child: DeclarationReflection) {
                 let parents = child.extendedTypes;
-                if (parents !== null) {
+                if (parents) {
                     let firstParent = parents[0] as ReferenceType;
                     let parentReflection = firstParent.reflection as DeclarationReflection;
                     if (parentReflection && parentReflection.extendedTypes) {

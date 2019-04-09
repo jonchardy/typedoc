@@ -1,4 +1,4 @@
-import { Reflection, ContainerReflection, DeclarationReflection } from '../../models';
+import { Reflection, ReflectionFlag, ContainerReflection, DeclarationReflection } from '../../models';
 import { ReflectionCategory } from '../../models/ReflectionCategory';
 import { Component, ConverterComponent } from '../components';
 import { Converter } from '../converter';
@@ -144,6 +144,12 @@ export class CategoryPlugin extends ConverterComponent {
                 }
                 defaultCat.children.push(child);
                 return;
+            }
+            if (childCat.indexOf('Extension') >= 0) {
+                child.setFlag(ReflectionFlag.Extension);
+            }
+            if (childCat.indexOf('Storage') >= 0) {
+                child.setFlag(ReflectionFlag.Storage);
             }
             let category = categories.find(cat => cat.title === childCat);
             if (category) {
