@@ -105,7 +105,7 @@ export class ProjectReflection extends ContainerReflection {
 
         search: for (let key in this.reflections) {
             const reflection = this.reflections[key];
-            if (reflection.name !== name || (staticLink && !reflection.flags.isStatic)) {
+            if (reflection.name !== name || staticLink !== reflection.flags.isStatic) {
                 continue;
             }
             if (names.length === 1 && reflection.parent !== this) {

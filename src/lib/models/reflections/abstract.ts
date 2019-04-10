@@ -523,7 +523,7 @@ export abstract class Reflection {
         }
 
         this.traverse((child) => {
-            if (child.name === name && !(staticLink && !child.flags.isStatic)) {
+            if (child.name === name && staticLink === child.flags.isStatic) {
                 if (names.length <= 1) {
                     result = child;
                 } else if (child) {
