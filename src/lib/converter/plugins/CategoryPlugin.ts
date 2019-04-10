@@ -113,13 +113,15 @@ export class CategoryPlugin extends ConverterComponent {
     }
 
     private lumpCategorize(obj: ContainerReflection) {
-        if (obj instanceof ContainerReflection) {
-            if (obj.children && obj.children.length > 0) {
-                obj.categories = CategoryPlugin.getReflectionCategories(obj.children);
-            }
-            if (obj.categories && obj.categories.length > 1) {
-                obj.categories.sort(CategoryPlugin.sortCatCallback);
-            }
+        if (!obj.children || obj.children.length === 0) {
+            return;
+        }
+        obj.categories = CategoryPlugin.getReflectionCategories(obj.children);
+        if (obj.categories && obj.categories.length > 1) {
+            obj.categories.sort(CategoryPlugin.sortCatCallback);
+        } else if (obj.categories.length === 1 && obj.categories[0].title === CategoryPlugin.defaultCategory) {
+            // no categories if everything is uncategorized
+            obj.categories = undefined;
         }
     }
 
