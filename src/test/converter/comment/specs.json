@@ -6,25 +6,95 @@
   "children": [
     {
       "id": 1,
-      "name": "\"comment\"",
+      "name": "comment",
       "kind": 1,
-      "kindString": "External module",
-      "flags": {
-        "isExported": true
+      "kindString": "Module",
+      "flags": {},
+      "comment": {
+        "shortText": "This is a module doc comment with legacy behavior."
       },
-      "originalName": "%BASE%/comment/comment.ts",
       "children": [
         {
-          "id": 2,
+          "id": 32,
+          "name": "GH1522",
+          "kind": 2,
+          "kindString": "Namespace",
+          "flags": {},
+          "children": [
+            {
+              "id": 33,
+              "name": "over",
+              "kind": 64,
+              "kindString": "Function",
+              "flags": {},
+              "signatures": [
+                {
+                  "id": 34,
+                  "name": "over",
+                  "kind": 4096,
+                  "kindString": "Call signature",
+                  "flags": {},
+                  "comment": {},
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "string"
+                  }
+                },
+                {
+                  "id": 35,
+                  "name": "over",
+                  "kind": 4096,
+                  "kindString": "Call signature",
+                  "flags": {},
+                  "comment": {},
+                  "parameters": [
+                    {
+                      "id": 36,
+                      "name": "x",
+                      "kind": 32768,
+                      "kindString": "Parameter",
+                      "flags": {},
+                      "type": {
+                        "type": "intrinsic",
+                        "name": "number"
+                      }
+                    }
+                  ],
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "title": "Functions",
+              "kind": 64,
+              "children": [
+                33
+              ],
+              "categories": [
+                {
+                  "title": "cat",
+                  "children": [
+                    33
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 5,
           "name": "CommentedClass",
           "kind": 128,
           "kindString": "Class",
-          "flags": {
-            "isExported": true
-          },
+          "flags": {},
           "comment": {
             "shortText": "A Comment for a class",
-            "text": "## Some Markup\n**with more markup**\n\nA example with decorators that should not parse to tag\n```\n@myDecorator\n@FactoryDecorator('a', 'b', 'c')\nexport class CommentedClass {\n  myProp: string = 'myProp';\n\n  @PropDecorator() decoratedProp: string;\n\n  constructor(@ParamDecorator public param: string) { }\n\n  myMethod() { }\n}\n```",
+            "text": "## Some Markup\n**with more markup**\n\nAn example with decorators that should not parse to tag\n```\n@myDecorator\n@FactoryDecorator('a', 'b', 'c')\nexport class CommentedClass {\n  myProp: string = 'myProp';\n\n  @PropDecorator() decoratedProp: string;\n\n  constructor(@ParamDecorator public param: string) { }\n\n  myMethod() { }\n}\n```",
             "tags": [
               {
                 "tag": "deprecated",
@@ -38,21 +108,186 @@
           },
           "children": [
             {
-              "id": 3,
+              "id": 6,
+              "name": "constructor",
+              "kind": 512,
+              "kindString": "Constructor",
+              "flags": {},
+              "signatures": [
+                {
+                  "id": 7,
+                  "name": "new CommentedClass",
+                  "kind": 16384,
+                  "kindString": "Constructor signature",
+                  "flags": {},
+                  "type": {
+                    "type": "reference",
+                    "id": 5,
+                    "name": "CommentedClass"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 8,
               "name": "prop",
               "kind": 1024,
               "kindString": "Property",
-              "flags": {
-                "isExported": true
-              },
+              "flags": {},
               "comment": {
                 "shortText": "The main prop"
               },
-              "sources": [
+              "type": {
+                "type": "intrinsic",
+                "name": "string"
+              }
+            },
+            {
+              "id": 22,
+              "name": "mixedHidden",
+              "kind": 2048,
+              "kindString": "Method",
+              "flags": {},
+              "signatures": [
                 {
-                  "fileName": "comment.ts",
-                  "line": 28,
-                  "character": 6
+                  "id": 25,
+                  "name": "mixedHidden",
+                  "kind": 4096,
+                  "kindString": "Call signature",
+                  "flags": {},
+                  "comment": {
+                    "shortText": "Mixed hidden 2"
+                  },
+                  "parameters": [
+                    {
+                      "id": 26,
+                      "name": "arg1",
+                      "kind": 32768,
+                      "kindString": "Parameter",
+                      "flags": {},
+                      "type": {
+                        "type": "intrinsic",
+                        "name": "any"
+                      }
+                    },
+                    {
+                      "id": 27,
+                      "name": "arg2",
+                      "kind": 32768,
+                      "kindString": "Parameter",
+                      "flags": {},
+                      "type": {
+                        "type": "intrinsic",
+                        "name": "any"
+                      }
+                    }
+                  ],
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "any"
+                  }
+                }
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "title": "Constructors",
+              "kind": 512,
+              "children": [
+                6
+              ]
+            },
+            {
+              "title": "Properties",
+              "kind": 1024,
+              "children": [
+                8
+              ]
+            },
+            {
+              "title": "Methods",
+              "kind": 2048,
+              "children": [
+                22
+              ]
+            }
+          ]
+        },
+        {
+          "id": 29,
+          "name": "GH1490",
+          "kind": 256,
+          "kindString": "Interface",
+          "flags": {},
+          "children": [
+            {
+              "id": 30,
+              "name": "optionalMethod",
+              "kind": 2048,
+              "kindString": "Method",
+              "flags": {
+                "isOptional": true
+              },
+              "signatures": [
+                {
+                  "id": 31,
+                  "name": "optionalMethod",
+                  "kind": 4096,
+                  "kindString": "Call signature",
+                  "flags": {},
+                  "comment": {
+                    "shortText": "With comment"
+                  },
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "void"
+                  }
+                }
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "title": "Methods",
+              "kind": 2048,
+              "children": [
+                30
+              ]
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "gh1164",
+          "kind": 64,
+          "kindString": "Function",
+          "flags": {},
+          "signatures": [
+            {
+              "id": 3,
+              "name": "gh1164",
+              "kind": 4096,
+              "kindString": "Call signature",
+              "flags": {},
+              "comment": {
+                "shortText": "Function description",
+                "returns": "Test description.\n"
+              },
+              "parameters": [
+                {
+                  "id": 4,
+                  "name": "scope",
+                  "kind": 32768,
+                  "kindString": "Parameter",
+                  "flags": {},
+                  "comment": {
+                    "text": "{@link CommentedClass} Test description."
+                  },
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "string"
+                  }
                 }
               ],
               "type": {
@@ -60,49 +295,246 @@
                 "name": "string"
               }
             }
-          ],
-          "groups": [
+          ]
+        }
+      ],
+      "groups": [
+        {
+          "title": "Namespaces",
+          "kind": 2,
+          "children": [
+            32
+          ]
+        },
+        {
+          "title": "Classes",
+          "kind": 128,
+          "children": [
+            5
+          ]
+        },
+        {
+          "title": "Interfaces",
+          "kind": 256,
+          "children": [
+            29
+          ]
+        },
+        {
+          "title": "Functions",
+          "kind": 64,
+          "children": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "name": "comment2",
+      "kind": 1,
+      "kindString": "Module",
+      "flags": {},
+      "comment": {
+        "shortText": "This is a module doc with the packageDocumentation tag to mark it as documentation\nfor the whole module. It is *not* documentation for the `multiply` function.",
+        "text": "This behavior will be deprecated and removed in the future. Use the `module` tag instead.\n"
+      },
+      "children": [
+        {
+          "id": 38,
+          "name": "multiply",
+          "kind": 64,
+          "kindString": "Function",
+          "flags": {},
+          "signatures": [
             {
-              "title": "Properties",
-              "kind": 1024,
-              "children": [
-                3
-              ]
-            }
-          ],
-          "sources": [
-            {
-              "fileName": "comment.ts",
-              "line": 24,
-              "character": 27
+              "id": 39,
+              "name": "multiply",
+              "kind": 4096,
+              "kindString": "Call signature",
+              "flags": {},
+              "parameters": [
+                {
+                  "id": 40,
+                  "name": "a",
+                  "kind": 32768,
+                  "kindString": "Parameter",
+                  "flags": {},
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "number"
+                  }
+                },
+                {
+                  "id": 41,
+                  "name": "b",
+                  "kind": 32768,
+                  "kindString": "Parameter",
+                  "flags": {},
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "number"
+                  }
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "number"
+              }
             }
           ]
         }
       ],
       "groups": [
         {
-          "title": "Classes",
-          "kind": 128,
+          "title": "Functions",
+          "kind": 64,
           "children": [
-            2
+            38
+          ]
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "name": "comment3",
+      "kind": 1,
+      "kindString": "Module",
+      "flags": {},
+      "comment": {
+        "shortText": "This is a module doc with the module tag to mark it as documentation\nfor the whole module. It is *not* documentation for the `multiply` function."
+      },
+      "children": [
+        {
+          "id": 43,
+          "name": "multiply",
+          "kind": 64,
+          "kindString": "Function",
+          "flags": {},
+          "signatures": [
+            {
+              "id": 44,
+              "name": "multiply",
+              "kind": 4096,
+              "kindString": "Call signature",
+              "flags": {},
+              "parameters": [
+                {
+                  "id": 45,
+                  "name": "a",
+                  "kind": 32768,
+                  "kindString": "Parameter",
+                  "flags": {},
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "number"
+                  }
+                },
+                {
+                  "id": 46,
+                  "name": "b",
+                  "kind": 32768,
+                  "kindString": "Parameter",
+                  "flags": {},
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "number"
+                  }
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "number"
+              }
+            }
           ]
         }
       ],
-      "sources": [
+      "groups": [
         {
-          "fileName": "comment.ts",
-          "line": 1,
-          "character": 0
+          "title": "Functions",
+          "kind": 64,
+          "children": [
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "name": "comment4",
+      "kind": 1,
+      "kindString": "Module",
+      "flags": {},
+      "comment": {
+        "shortText": "This is a comment containing a multiline code block\n```ts\nexport function multiply(a: number, b: number) {\n  return a * b;\n}\n```"
+      },
+      "children": [
+        {
+          "id": 48,
+          "name": "multiply",
+          "kind": 64,
+          "kindString": "Function",
+          "flags": {},
+          "signatures": [
+            {
+              "id": 49,
+              "name": "multiply",
+              "kind": 4096,
+              "kindString": "Call signature",
+              "flags": {},
+              "parameters": [
+                {
+                  "id": 50,
+                  "name": "a",
+                  "kind": 32768,
+                  "kindString": "Parameter",
+                  "flags": {},
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "number"
+                  }
+                },
+                {
+                  "id": 51,
+                  "name": "b",
+                  "kind": 32768,
+                  "kindString": "Parameter",
+                  "flags": {},
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "number"
+                  }
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "number"
+              }
+            }
+          ]
+        }
+      ],
+      "groups": [
+        {
+          "title": "Functions",
+          "kind": 64,
+          "children": [
+            48
+          ]
         }
       ]
     }
   ],
   "groups": [
     {
-      "title": "External modules",
+      "title": "Modules",
       "kind": 1,
       "children": [
-        1
+        1,
+        37,
+        42,
+        47
       ]
     }
   ]

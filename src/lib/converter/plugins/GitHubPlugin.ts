@@ -1,13 +1,12 @@
-import * as ShellJS from 'shelljs';
-import * as Path from 'path';
+import * as ShellJS from "shelljs";
+import * as Path from "path";
 
-import { SourceReference } from '../../models/sources/file';
-import { Component, ConverterComponent } from '../components';
-import { BasePath } from '../utils/base-path';
-import { Converter } from '../converter';
-import { Context } from '../context';
-import { Option } from '../../utils/component';
-import { ParameterType } from '../../utils/options/declaration';
+import { SourceReference } from "../../models/sources/file";
+import { Component, ConverterComponent } from "../components";
+import { BasePath } from "../utils/base-path";
+import { Converter } from "../converter";
+import { Context } from "../context";
+import { BindOption } from "../../utils";
 
 /**
  * Stores data of a repository.
@@ -29,7 +28,7 @@ export class Repository {
     files: string[] = [];
 
     /**
-     * The user/organisation name of this repository on GitHub.
+     * The user/organization name of this repository on GitHub.
      */
     gitHubUser?: string;
 
@@ -46,7 +45,7 @@ export class Repository {
      * Or the hostname for an enterprise version of GitHub, e.g. `github.acme.com`
      * (if found as a match in the list of git remotes).
      */
-    gitHubHostname = 'github.com';
+    gitHubHostname = "github.com";
 
     /**
      * Create a new Repository instance.
@@ -55,38 +54,45 @@ export class Repository {
      */
     constructor(path: string, gitRevision: string, repoLinks: string[]) {
         this.path = path;
-        this.branch = gitRevision || 'master';
+        this.branch = gitRevision || "master";
         ShellJS.pushd(path);
 
-        let url: RegExpExecArray | null;
-
         for (let i = 0, c = repoLinks.length; i < c; i++) {
-            url = /(github(?:\.[a-z]+)*\.com)[:\/]([^\/]+)\/(.*)/.exec(repoLinks[i]);
+            const url = /(github(?:\.[a-z]+)*\.[a-z]{2,})[:/]([^/]+)\/(.*)/.exec(
+                repoLinks[i]
+            );
 
             if (url) {
                 this.gitHubHostname = url[1];
                 this.gitHubUser = url[2];
                 this.gitHubProject = url[3];
-                if (this.gitHubProject.substr(-4) === '.git') {
-                    this.gitHubProject = this.gitHubProject.substr(0, this.gitHubProject.length - 4);
+                if (this.gitHubProject.substr(-4) === ".git") {
+                    this.gitHubProject = this.gitHubProject.substr(
+                        0,
+                        this.gitHubProject.length - 4
+                    );
                 }
                 break;
             }
         }
 
-        let out = <ShellJS.ExecOutputReturnValue> ShellJS.exec('git ls-files', {silent: true});
+        let out = <ShellJS.ExecOutputReturnValue>(
+            ShellJS.exec("git ls-files", { silent: true })
+        );
         if (out.code === 0) {
-            out.stdout.split('\n').forEach((file) => {
-                if (file !== '') {
-                    this.files.push(BasePath.normalize(path + '/' + file));
+            out.stdout.split("\n").forEach((file) => {
+                if (file !== "") {
+                    this.files.push(BasePath.normalize(path + "/" + file));
                 }
             });
         }
 
         if (!gitRevision) {
-            out = <ShellJS.ExecOutputReturnValue> ShellJS.exec('git rev-parse --short HEAD', {silent: true});
+            out = <ShellJS.ExecOutputReturnValue>(
+                ShellJS.exec("git rev-parse --short HEAD", { silent: true })
+            );
             if (out.code === 0) {
-                this.branch = out.stdout.replace('\n', '');
+                this.branch = out.stdout.replace("\n", "");
             }
         }
 
@@ -110,7 +116,11 @@ export class Repository {
      * @returns An url pointing to the web preview of the given file or NULL.
      */
     getGitHubURL(fileName: string): string | undefined {
-        if (!this.gitHubUser || !this.gitHubProject || !this.contains(fileName)) {
+        if (
+            !this.gitHubUser ||
+            !this.gitHubProject ||
+            !this.contains(fileName)
+        ) {
             return;
         }
 
@@ -118,10 +128,10 @@ export class Repository {
             `https://${this.gitHubHostname}`,
             this.gitHubUser,
             this.gitHubProject,
-            'blob',
+            "blob",
             this.branch,
-            fileName.substr(this.path.length + 1)
-        ].join('/');
+            fileName.substr(this.path.length + 1),
+        ].join("/");
     }
 
     /**
@@ -133,19 +143,37 @@ export class Repository {
      * @param path  The potential repository root.
      * @returns A new instance of [[Repository]] or undefined.
      */
-    static tryCreateRepository(path: string, gitRevision: string): Repository | undefined {
+    static tryCreateRepository(
+        path: string,
+        gitRevision: string,
+        gitRemote: string
+    ): Repository | undefined {
         ShellJS.pushd(path);
-        const out = <ShellJS.ExecOutputReturnValue> ShellJS.exec('git rev-parse --show-toplevel', {silent: true});
+        const out = <ShellJS.ExecOutputReturnValue>(
+            ShellJS.exec("git rev-parse --show-toplevel", { silent: true })
+        );
+        const remotesOutput = <ShellJS.ExecOutputReturnValue>(
+            ShellJS.exec(`git remote get-url ${gitRemote}`, { silent: true })
+        );
         ShellJS.popd();
 
-        if (!out || out.code !== 0) {
+        if (
+            !out ||
+            out.code !== 0 ||
+            !remotesOutput ||
+            remotesOutput.code !== 0
+        ) {
             return;
         }
 
-        let remotesOutput = <ShellJS.ExecOutputReturnValue> ShellJS.exec('git ls-remote --get-url', {silent: true});
-        let remotes: string[] = (remotesOutput.code === 0) ? remotesOutput.stdout.split('\n') : [];
+        const remotes: string[] =
+            remotesOutput.code === 0 ? remotesOutput.stdout.split("\n") : [];
 
-        return new Repository(BasePath.normalize(out.stdout.replace('\n', '')), gitRevision, remotes);
+        return new Repository(
+            BasePath.normalize(out.stdout.replace("\n", "")),
+            gitRevision,
+            remotes
+        );
     }
 }
 
@@ -153,24 +181,23 @@ export class Repository {
  * A handler that watches for repositories with GitHub origin and links
  * their source files to the related GitHub pages.
  */
-@Component({name: 'git-hub'})
+@Component({ name: "git-hub" })
 export class GitHubPlugin extends ConverterComponent {
     /**
      * List of known repositories.
      */
-    private repositories: {[path: string]: Repository} = {};
+    private repositories: { [path: string]: Repository } = {};
 
     /**
      * List of paths known to be not under git control.
      */
     private ignoredPaths: string[] = [];
 
-    @Option({
-        name: 'gitRevision',
-        help: 'Use specified revision instead of the last revision for linking to GitHub source files.',
-        type: ParameterType.String
-    })
-    gitRevision!: string;
+    @BindOption("gitRevision")
+    readonly gitRevision!: string;
+
+    @BindOption("gitRemote")
+    readonly gitRemote!: string;
 
     /**
      * Create a new GitHubHandler instance.
@@ -179,8 +206,12 @@ export class GitHubPlugin extends ConverterComponent {
      */
     initialize() {
         ShellJS.config.silent = true;
-        if (ShellJS.which('git')) {
-            this.listenTo(this.owner, Converter.EVENT_RESOLVE_END, this.onEndResolve);
+        if (ShellJS.which("git")) {
+            this.listenTo(
+                this.owner,
+                Converter.EVENT_RESOLVE_END,
+                this.onEndResolve
+            );
         }
     }
 
@@ -200,26 +231,27 @@ export class GitHubPlugin extends ConverterComponent {
         }
 
         // Check for known repositories
-        for (let path in this.repositories) {
-            if (!this.repositories.hasOwnProperty(path)) {
-                continue;
-            }
+        for (const path of Object.keys(this.repositories)) {
             if (fileName.substr(0, path.length).toLowerCase() === path) {
                 return this.repositories[path];
             }
         }
 
         // Try to create a new repository
-        const repository = Repository.tryCreateRepository(dirName, this.gitRevision);
+        const repository = Repository.tryCreateRepository(
+            dirName,
+            this.gitRevision,
+            this.gitRemote
+        );
         if (repository) {
             this.repositories[repository.path.toLowerCase()] = repository;
             return repository;
         }
 
         // No repository found, add path to ignored paths
-        const segments = dirName.split('/');
+        const segments = dirName.split("/");
         for (let i = segments.length; i > 0; i--) {
-            this.ignoredPaths.push(segments.slice(0, i).join('/'));
+            this.ignoredPaths.push(segments.slice(0, i).join("/"));
         }
     }
 
@@ -233,16 +265,18 @@ export class GitHubPlugin extends ConverterComponent {
         project.files.forEach((sourceFile) => {
             const repository = this.getRepository(sourceFile.fullFileName);
             if (repository) {
-                sourceFile.url = repository.getGitHubURL(sourceFile.fullFileName);
+                sourceFile.url = repository.getGitHubURL(
+                    sourceFile.fullFileName
+                );
             }
         });
 
-        for (let key in project.reflections) {
+        for (const key in project.reflections) {
             const reflection = project.reflections[key];
             if (reflection.sources) {
                 reflection.sources.forEach((source: SourceReference) => {
                     if (source.file && source.file.url) {
-                        source.url = source.file.url + '#L' + source.line;
+                        source.url = source.file.url + "#L" + source.line;
                     }
                 });
             }

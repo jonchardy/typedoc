@@ -1,86 +1,58 @@
-import * as ts from 'typescript';
-const tsany = ts as any;
+import * as ts from "typescript";
 
 /**
  * Expose the internal TypeScript APIs that are used by TypeDoc
  */
-declare module 'typescript' {
-  interface Symbol {
-    // https://github.com/Microsoft/TypeScript/blob/v2.1.4/src/compiler/types.ts#L2658
-    id?: number;
-    // https://github.com/Microsoft/TypeScript/blob/v2.1.4/src/compiler/types.ts#L2660
-    parent?: ts.Symbol;
-  }
+declare module "typescript" {
+    interface Node {
+        // https://github.com/microsoft/TypeScript/blob/v4.1.5/src/compiler/types.ts#L847
+        symbol?: ts.Symbol;
+    }
 
-  interface Node {
-    // https://github.com/Microsoft/TypeScript/blob/v2.1.4/src/compiler/types.ts#L497
-    symbol?: ts.Symbol;
-    // https://github.com/Microsoft/TypeScript/blob/v2.1.4/src/compiler/types.ts#L500
-    localSymbol?: ts.Symbol;
-  }
+    interface Symbol {
+        // https://github.com/microsoft/TypeScript/blob/v4.1.5/src/compiler/types.ts#L4734-L4737
+        checkFlags?: CheckFlags;
+    }
+
+    interface TypeChecker {
+        // https://github.com/microsoft/TypeScript/blob/v4.1.5/src/compiler/types.ts#L4145
+        // https://github.com/microsoft/TypeScript/issues/42118
+        getTypePredicateOfSignature(
+            signature: ts.Signature
+        ): ts.TypePredicate | undefined;
+    }
+
+    // https://github.com/microsoft/TypeScript/blob/e213b2af3430bdc9cf5fbc76a8634d832e7aaaaa/src/compiler/types.ts#L5298-L5299
+    export interface UnionType {
+        /* @internal */
+        origin?: ts.Type; // Denormalized union, intersection, or index type in which union originates
+    }
+
+    // https://github.com/microsoft/TypeScript/blob/v4.1.5/src/compiler/types.ts#L4707-L4732
+    /* @internal */
+    export enum CheckFlags {
+        Instantiated = 1 << 0, // Instantiated symbol
+        SyntheticProperty = 1 << 1, // Property in union or intersection type
+        SyntheticMethod = 1 << 2, // Method in union or intersection type
+        Readonly = 1 << 3, // Readonly transient symbol
+        ReadPartial = 1 << 4, // Synthetic property present in some but not all constituents
+        WritePartial = 1 << 5, // Synthetic property present in some but only satisfied by an index signature in others
+        HasNonUniformType = 1 << 6, // Synthetic property with non-uniform type in constituents
+        HasLiteralType = 1 << 7, // Synthetic property with at least one literal type in constituents
+        ContainsPublic = 1 << 8, // Synthetic property with public constituent(s)
+        ContainsProtected = 1 << 9, // Synthetic property with protected constituent(s)
+        ContainsPrivate = 1 << 10, // Synthetic property with private constituent(s)
+        ContainsStatic = 1 << 11, // Synthetic property with static constituent(s)
+        Late = 1 << 12, // Late-bound symbol for a computed property with a dynamic name
+        ReverseMapped = 1 << 13, // Property of reverse-inferred homomorphic mapped type
+        OptionalParameter = 1 << 14, // Optional parameter
+        RestParameter = 1 << 15, // Rest parameter
+        DeferredType = 1 << 16, // Calculation of the type of this symbol is deferred due to processing costs, should be fetched with `getTypeOfSymbolWithDeferredType`
+        HasNeverType = 1 << 17, // Synthetic property with at least one never type in constituents
+        Mapped = 1 << 18, // Property of mapped type
+        StripOptional = 1 << 19, // Strip optionality in mapped property
+        Synthetic = SyntheticProperty | SyntheticMethod,
+        Discriminant = HasNonUniformType | HasLiteralType,
+        Partial = ReadPartial | WritePartial,
+    }
 }
-
-// Everything past here is required for supporting TypeScript's command line options.
-// If TypeDoc dropped support for allowing all of tsc's cli flags, this can all go.
-
-// https://github.com/Microsoft/TypeScript/blob/v2.1.4/src/compiler/core.ts#L1133-LL1134
-export function createCompilerDiagnostic(message: ts.DiagnosticMessage, ...args: (string | number)[]): ts.Diagnostic;
-export function createCompilerDiagnostic(message: ts.DiagnosticMessage): ts.Diagnostic;
-export function createCompilerDiagnostic() {
-  return tsany.createCompilerDiagnostic.apply(this, arguments);
-}
-
-export const optionDeclarations: CommandLineOption[] = tsany.optionDeclarations;
-
-/**
- * Command line options
- *
- * https://github.com/Microsoft/TypeScript/blob/v2.1.4/src/compiler/types.ts#L3310
- */
-export interface CommandLineOptionBase {
-  name: string;
-  /**
-   * a value of a primitive type, or an object literal mapping named values to actual values
-   */
-  type: 'string' | 'number' | 'boolean' | 'object' | 'list' | Map<number | string, any>;
-  /**
-   * True if option value is a path or fileName
-   */
-  isFilePath?: boolean;
-  /**
-   * A short mnemonic for convenience - for instance, 'h' can be used in place of 'help'
-   */
-  shortName?: string;
-  /**
-   * The message describing what the command line switch does
-   */
-  description?: ts.DiagnosticMessage;
-  /**
-   * The name to be used for a non-boolean option's parameter
-   */
-  paramType?: ts.DiagnosticMessage;
-  experimental?: boolean;
-  /**
-   * True if option can only be specified via tsconfig.json file
-   */
-  isTSConfigOnly?: boolean;
-}
-
-export interface CommandLineOptionOfPrimitiveType extends CommandLineOptionBase {
-  type: 'string' | 'number' | 'boolean';
-}
-
-export interface CommandLineOptionOfCustomType extends CommandLineOptionBase {
-  type: Map<number | string, any>;  // an object literal mapping named values to actual values
-}
-
-export interface TsConfigOnlyOption extends CommandLineOptionBase {
-  type: 'object';
-}
-
-export interface CommandLineOptionOfListType extends CommandLineOptionBase {
-  type: 'list';
-  element: CommandLineOptionOfCustomType | CommandLineOptionOfPrimitiveType;
-}
-
-export type CommandLineOption = CommandLineOptionOfCustomType | CommandLineOptionOfPrimitiveType | TsConfigOnlyOption | CommandLineOptionOfListType;

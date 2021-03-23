@@ -1,0 +1,996 @@
+{
+  "id": 0,
+  "name": "typedoc",
+  "kind": 0,
+  "flags": {},
+  "children": [
+    {
+      "id": 1,
+      "name": "declaration-merging",
+      "kind": 1,
+      "kindString": "Module",
+      "flags": {},
+      "children": [
+        {
+          "id": 9,
+          "name": "gh1483",
+          "kind": 2,
+          "kindString": "Namespace",
+          "flags": {},
+          "children": [
+            {
+              "id": 10,
+              "name": "namespaceExport",
+              "kind": 64,
+              "kindString": "Function",
+              "flags": {},
+              "signatures": [
+                {
+                  "id": 11,
+                  "name": "namespaceExport",
+                  "kind": 4096,
+                  "kindString": "Call signature",
+                  "flags": {},
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "void"
+                  }
+                }
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "title": "Functions",
+              "kind": 64,
+              "children": [
+                10
+              ]
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "GH1481",
+          "kind": 128,
+          "kindString": "Class",
+          "flags": {},
+          "children": [
+            {
+              "id": 5,
+              "name": "constructor",
+              "kind": 512,
+              "kindString": "Constructor",
+              "flags": {},
+              "signatures": [
+                {
+                  "id": 6,
+                  "name": "new GH1481",
+                  "kind": 16384,
+                  "kindString": "Constructor signature",
+                  "flags": {},
+                  "type": {
+                    "type": "reference",
+                    "id": 2,
+                    "name": "GH1481"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "name": "static",
+              "kind": 2048,
+              "kindString": "Method",
+              "flags": {
+                "isStatic": true
+              },
+              "signatures": [
+                {
+                  "id": 4,
+                  "name": "static",
+                  "kind": 4096,
+                  "kindString": "Call signature",
+                  "flags": {},
+                  "comment": {
+                    "shortText": "static docs"
+                  },
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "void"
+                  }
+                }
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "title": "Constructors",
+              "kind": 512,
+              "children": [
+                5
+              ]
+            },
+            {
+              "title": "Methods",
+              "kind": 2048,
+              "children": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "name": "gh1483_2",
+          "kind": 128,
+          "kindString": "Class",
+          "flags": {},
+          "children": [
+            {
+              "id": 15,
+              "name": "constructor",
+              "kind": 512,
+              "kindString": "Constructor",
+              "flags": {},
+              "signatures": [
+                {
+                  "id": 16,
+                  "name": "new gh1483_2",
+                  "kind": 16384,
+                  "kindString": "Constructor signature",
+                  "flags": {},
+                  "comment": {},
+                  "type": {
+                    "type": "reference",
+                    "id": 12,
+                    "name": "gh1483_2"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 13,
+              "name": "staticMethod",
+              "kind": 2048,
+              "kindString": "Method",
+              "flags": {
+                "isStatic": true
+              },
+              "signatures": [
+                {
+                  "id": 14,
+                  "name": "staticMethod",
+                  "kind": 4096,
+                  "kindString": "Call signature",
+                  "flags": {},
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "void"
+                  }
+                }
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "title": "Constructors",
+              "kind": 512,
+              "children": [
+                15
+              ]
+            },
+            {
+              "title": "Methods",
+              "kind": 2048,
+              "children": [
+                13
+              ]
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "name": "gh1483",
+          "kind": 64,
+          "kindString": "Function",
+          "flags": {},
+          "signatures": [
+            {
+              "id": 8,
+              "name": "gh1483",
+              "kind": 4096,
+              "kindString": "Call signature",
+              "flags": {},
+              "type": {
+                "type": "intrinsic",
+                "name": "void"
+              }
+            }
+          ]
+        }
+      ],
+      "groups": [
+        {
+          "title": "Namespaces",
+          "kind": 2,
+          "children": [
+            9
+          ]
+        },
+        {
+          "title": "Classes",
+          "kind": 128,
+          "children": [
+            2,
+            12
+          ]
+        },
+        {
+          "title": "Functions",
+          "kind": 64,
+          "children": [
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "export-eq-type",
+      "kind": 1,
+      "kindString": "Module",
+      "flags": {},
+      "comment": {},
+      "children": [
+        {
+          "id": 21,
+          "name": "Foo",
+          "kind": 4194304,
+          "kindString": "Type alias",
+          "flags": {},
+          "type": {
+            "type": "intrinsic",
+            "name": "string"
+          }
+        },
+        {
+          "id": 18,
+          "name": "export=",
+          "kind": 64,
+          "kindString": "Function",
+          "flags": {
+            "isConst": true
+          },
+          "signatures": [
+            {
+              "id": 19,
+              "name": "export=",
+              "kind": 4096,
+              "kindString": "Call signature",
+              "flags": {},
+              "comment": {},
+              "parameters": [
+                {
+                  "id": 20,
+                  "name": "x",
+                  "kind": 32768,
+                  "kindString": "Parameter",
+                  "flags": {},
+                  "comment": {},
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "string"
+                  }
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "groups": [
+        {
+          "title": "Type aliases",
+          "kind": 4194304,
+          "children": [
+            21
+          ]
+        },
+        {
+          "title": "Functions",
+          "kind": 64,
+          "children": [
+            18
+          ]
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "name": "index",
+      "kind": 1,
+      "kindString": "Module",
+      "flags": {},
+      "comment": {},
+      "children": [
+        {
+          "id": 31,
+          "name": "GH1481",
+          "kind": 128,
+          "kindString": "Class",
+          "flags": {},
+          "children": [
+            {
+              "id": 34,
+              "name": "constructor",
+              "kind": 512,
+              "kindString": "Constructor",
+              "flags": {},
+              "signatures": [
+                {
+                  "id": 35,
+                  "name": "new GH1481",
+                  "kind": 16384,
+                  "kindString": "Constructor signature",
+                  "flags": {},
+                  "type": {
+                    "type": "reference",
+                    "id": 31,
+                    "name": "GH1481"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 32,
+              "name": "static",
+              "kind": 2048,
+              "kindString": "Method",
+              "flags": {
+                "isStatic": true
+              },
+              "signatures": [
+                {
+                  "id": 33,
+                  "name": "static",
+                  "kind": 4096,
+                  "kindString": "Call signature",
+                  "flags": {},
+                  "comment": {
+                    "shortText": "static docs"
+                  },
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "void"
+                  }
+                }
+              ]
+            }
+          ],
+          "groups": [
+            {
+              "title": "Constructors",
+              "kind": 512,
+              "children": [
+                34
+              ]
+            },
+            {
+              "title": "Methods",
+              "kind": 2048,
+              "children": [
+                32
+              ]
+            }
+          ]
+        },
+        {
+          "id": 38,
+          "name": "AlsoInterfaceIsh",
+          "kind": 256,
+          "kindString": "Interface",
+          "flags": {},
+          "comment": {
+            "shortText": "docs for interface"
+          },
+          "children": [
+            {
+              "id": 40,
+              "name": "bar",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {},
+              "comment": {
+                "shortText": "can also use prop tag"
+              },
+              "type": {
+                "type": "intrinsic",
+                "name": "string"
+              }
+            },
+            {
+              "id": 39,
+              "name": "foo",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {},
+              "comment": {
+                "shortText": "docs for property"
+              },
+              "type": {
+                "type": "intrinsic",
+                "name": "string"
+              }
+            }
+          ],
+          "groups": [
+            {
+              "title": "Properties",
+              "kind": 1024,
+              "children": [
+                40,
+                39
+              ]
+            }
+          ]
+        },
+        {
+          "id": 36,
+          "name": "InterfaceIsh",
+          "kind": 256,
+          "kindString": "Interface",
+          "flags": {},
+          "children": [
+            {
+              "id": 37,
+              "name": "foo",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {},
+              "comment": {
+                "shortText": "docs for property\nmore docs for property"
+              },
+              "type": {
+                "type": "intrinsic",
+                "name": "string"
+              }
+            }
+          ],
+          "groups": [
+            {
+              "title": "Properties",
+              "kind": 1024,
+              "children": [
+                37
+              ]
+            }
+          ]
+        },
+        {
+          "id": 30,
+          "name": "ColumnType",
+          "kind": 4194304,
+          "kindString": "Type alias",
+          "flags": {},
+          "type": {
+            "type": "intrinsic",
+            "name": "string"
+          }
+        },
+        {
+          "id": 65,
+          "name": "Foo",
+          "kind": 4194304,
+          "kindString": "Type alias",
+          "flags": {},
+          "type": {
+            "type": "reflection",
+            "declaration": {
+              "id": 66,
+              "name": "__type",
+              "kind": 65536,
+              "kindString": "Type literal",
+              "flags": {},
+              "signatures": [
+                {
+                  "id": 67,
+                  "name": "__type",
+                  "kind": 4096,
+                  "kindString": "Call signature",
+                  "flags": {},
+                  "parameters": [
+                    {
+                      "id": 68,
+                      "name": "args",
+                      "kind": 32768,
+                      "kindString": "Parameter",
+                      "flags": {
+                        "isRest": true
+                      },
+                      "type": {
+                        "type": "array",
+                        "elementType": {
+                          "type": "intrinsic",
+                          "name": "string"
+                        }
+                      }
+                    }
+                  ],
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "number"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": 51,
+          "name": "HasReturnTag",
+          "kind": 4194304,
+          "kindString": "Type alias",
+          "flags": {},
+          "type": {
+            "type": "reflection",
+            "declaration": {
+              "id": 52,
+              "name": "__type",
+              "kind": 65536,
+              "kindString": "Type literal",
+              "flags": {},
+              "signatures": [
+                {
+                  "id": 53,
+                  "name": "__type",
+                  "kind": 4096,
+                  "kindString": "Call signature",
+                  "flags": {},
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "string"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": 63,
+          "name": "Identity",
+          "kind": 4194304,
+          "kindString": "Type alias",
+          "flags": {},
+          "comment": {
+            "shortText": "comment on alias"
+          },
+          "typeParameter": [
+            {
+              "id": 64,
+              "name": "T",
+              "kind": 131072,
+              "kindString": "Type parameter",
+              "flags": {},
+              "comment": {
+                "shortText": "comment on template"
+              }
+            }
+          ],
+          "type": {
+            "type": "reference",
+            "name": "T"
+          }
+        },
+        {
+          "id": 54,
+          "name": "IdentityFn",
+          "kind": 4194304,
+          "kindString": "Type alias",
+          "flags": {},
+          "typeParameter": [
+            {
+              "id": 58,
+              "name": "T",
+              "kind": 131072,
+              "kindString": "Type parameter",
+              "flags": {}
+            }
+          ],
+          "type": {
+            "type": "reflection",
+            "declaration": {
+              "id": 55,
+              "name": "__type",
+              "kind": 65536,
+              "kindString": "Type literal",
+              "flags": {},
+              "signatures": [
+                {
+                  "id": 56,
+                  "name": "__type",
+                  "kind": 4096,
+                  "kindString": "Call signature",
+                  "flags": {},
+                  "parameters": [
+                    {
+                      "id": 57,
+                      "name": "data",
+                      "kind": 32768,
+                      "kindString": "Parameter",
+                      "flags": {},
+                      "type": {
+                        "type": "reference",
+                        "name": "T"
+                      }
+                    }
+                  ],
+                  "type": {
+                    "type": "reference",
+                    "name": "T"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": 43,
+          "name": "IntersectionType",
+          "kind": 4194304,
+          "kindString": "Type alias",
+          "flags": {},
+          "comment": {
+            "shortText": "docs for alias"
+          },
+          "type": {
+            "type": "intersection",
+            "types": [
+              {
+                "type": "reflection",
+                "declaration": {
+                  "id": 44,
+                  "name": "__type",
+                  "kind": 65536,
+                  "kindString": "Type literal",
+                  "flags": {},
+                  "children": [
+                    {
+                      "id": 45,
+                      "name": "x",
+                      "kind": 1024,
+                      "kindString": "Property",
+                      "flags": {},
+                      "type": {
+                        "type": "intrinsic",
+                        "name": "string"
+                      }
+                    }
+                  ],
+                  "groups": [
+                    {
+                      "title": "Properties",
+                      "kind": 1024,
+                      "children": [
+                        45
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "reflection",
+                "declaration": {
+                  "id": 46,
+                  "name": "__type",
+                  "kind": 65536,
+                  "kindString": "Type literal",
+                  "flags": {},
+                  "children": [
+                    {
+                      "id": 47,
+                      "name": "y",
+                      "kind": 1024,
+                      "kindString": "Property",
+                      "flags": {},
+                      "type": {
+                        "type": "intrinsic",
+                        "name": "number"
+                      }
+                    }
+                  ],
+                  "groups": [
+                    {
+                      "title": "Properties",
+                      "kind": 1024,
+                      "children": [
+                        47
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": 48,
+          "name": "NoReturnTag",
+          "kind": 4194304,
+          "kindString": "Type alias",
+          "flags": {},
+          "type": {
+            "type": "reflection",
+            "declaration": {
+              "id": 49,
+              "name": "__type",
+              "kind": 65536,
+              "kindString": "Type literal",
+              "flags": {},
+              "signatures": [
+                {
+                  "id": 50,
+                  "name": "__type",
+                  "kind": 4096,
+                  "kindString": "Call signature",
+                  "flags": {},
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "any"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": 41,
+          "name": "ObjectAlias",
+          "kind": 4194304,
+          "kindString": "Type alias",
+          "flags": {},
+          "comment": {
+            "shortText": "type alias since it doesn't have a property tag"
+          },
+          "type": {
+            "type": "reference",
+            "name": "Object"
+          }
+        },
+        {
+          "id": 59,
+          "name": "OptionalArg",
+          "kind": 4194304,
+          "kindString": "Type alias",
+          "flags": {},
+          "type": {
+            "type": "reflection",
+            "declaration": {
+              "id": 60,
+              "name": "__type",
+              "kind": 65536,
+              "kindString": "Type literal",
+              "flags": {},
+              "signatures": [
+                {
+                  "id": 61,
+                  "name": "__type",
+                  "kind": 4096,
+                  "kindString": "Call signature",
+                  "flags": {},
+                  "parameters": [
+                    {
+                      "id": 62,
+                      "name": "data",
+                      "kind": 32768,
+                      "kindString": "Parameter",
+                      "flags": {
+                        "isOptional": true
+                      },
+                      "type": {
+                        "type": "intrinsic",
+                        "name": "string"
+                      }
+                    }
+                  ],
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "any"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": 42,
+          "name": "UnionType",
+          "kind": 4194304,
+          "kindString": "Type alias",
+          "flags": {},
+          "comment": {
+            "shortText": "docs for alias"
+          },
+          "type": {
+            "type": "union",
+            "types": [
+              {
+                "type": "intrinsic",
+                "name": "string"
+              },
+              {
+                "type": "intrinsic",
+                "name": "number"
+              }
+            ]
+          }
+        },
+        {
+          "id": 26,
+          "name": "ColumnType",
+          "kind": 32,
+          "kindString": "Variable",
+          "flags": {
+            "isConst": true
+          },
+          "comment": {},
+          "type": {
+            "type": "reflection",
+            "declaration": {
+              "id": 27,
+              "name": "__type",
+              "kind": 65536,
+              "kindString": "Type literal",
+              "flags": {},
+              "children": [
+                {
+                  "id": 29,
+                  "name": "NUMBER",
+                  "kind": 1024,
+                  "kindString": "Property",
+                  "flags": {},
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "string"
+                  },
+                  "defaultValue": "\"number\""
+                },
+                {
+                  "id": 28,
+                  "name": "STRING",
+                  "kind": 1024,
+                  "kindString": "Property",
+                  "flags": {},
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "string"
+                  },
+                  "defaultValue": "\"string\""
+                }
+              ],
+              "groups": [
+                {
+                  "title": "Properties",
+                  "kind": 1024,
+                  "children": [
+                    29,
+                    28
+                  ]
+                }
+              ]
+            }
+          },
+          "defaultValue": "..."
+        },
+        {
+          "id": 23,
+          "name": "usedFoo",
+          "kind": 64,
+          "kindString": "Function",
+          "flags": {
+            "isConst": true
+          },
+          "signatures": [
+            {
+              "id": 24,
+              "name": "usedFoo",
+              "kind": 4096,
+              "kindString": "Call signature",
+              "flags": {},
+              "comment": {},
+              "parameters": [
+                {
+                  "id": 25,
+                  "name": "args",
+                  "kind": 32768,
+                  "kindString": "Parameter",
+                  "flags": {
+                    "isRest": true
+                  },
+                  "type": {
+                    "type": "union",
+                    "types": [
+                      {
+                        "type": "intrinsic",
+                        "name": "undefined"
+                      },
+                      {
+                        "type": "intrinsic",
+                        "name": "string"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "number"
+              }
+            }
+          ]
+        }
+      ],
+      "groups": [
+        {
+          "title": "Classes",
+          "kind": 128,
+          "children": [
+            31
+          ]
+        },
+        {
+          "title": "Interfaces",
+          "kind": 256,
+          "children": [
+            38,
+            36
+          ]
+        },
+        {
+          "title": "Type aliases",
+          "kind": 4194304,
+          "children": [
+            30,
+            65,
+            51,
+            63,
+            54,
+            43,
+            48,
+            41,
+            59,
+            42
+          ]
+        },
+        {
+          "title": "Variables",
+          "kind": 32,
+          "children": [
+            26
+          ]
+        },
+        {
+          "title": "Functions",
+          "kind": 64,
+          "children": [
+            23
+          ]
+        }
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "title": "Modules",
+      "kind": 1,
+      "children": [
+        1,
+        17,
+        22
+      ]
+    }
+  ]
+}
