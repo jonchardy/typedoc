@@ -69,6 +69,17 @@ export function convertSymbol(
         return;
     }
 
+    // This check can catch symbols which ought to be documented as references
+    // but aren't aliased symbols because `export *` was used.
+    const previous = context.project.getReflectionFromSymbol(symbol);
+    if (
+        previous &&
+        previous.parent?.kindOf(ReflectionKind.Module | ReflectionKind.Project)
+    ) {
+        createAlias(previous, context, symbol, exportSymbol);
+        return;
+    }
+
     let flags = removeFlag(
         symbol.flags,
         ts.SymbolFlags.Transient |
@@ -574,13 +585,6 @@ function convertProperty(
             parameterType = declaration.type;
         }
         setModifiers(symbol, declaration, reflection);
-        const parentSymbol = context.project.getSymbolFromReflection(
-            context.scope
-        );
-        assert(parentSymbol, "Tried to convert a property without a parent.");
-        if (ts.isPrivateIdentifier(declaration.name)) {
-            reflection.setFlag(ReflectionFlag.Private);
-        }
     }
     reflection.defaultValue = declaration && convertDefaultValue(declaration);
 
@@ -708,25 +712,31 @@ function convertAlias(
             exportSymbol ?? symbol
         );
     } else {
-        // We already have this. Create a reference.
-        const ref = new ReferenceReflection(
-            exportSymbol?.name ?? symbol.name,
-            reflection,
-            context.scope
-        );
-        context.addChild(ref);
-        context.registerReflection(ref, symbol);
-
-        context.trigger(
-            ConverterEvents.CREATE_DECLARATION,
-            ref,
-            // FIXME this isn't good enough.
-            context.converter.getNodesForSymbol(
-                symbol,
-                ReflectionKind.Reference
-            )[0]
-        );
+        createAlias(reflection, context, symbol, exportSymbol);
     }
+}
+
+function createAlias(
+    target: Reflection,
+    context: Context,
+    symbol: ts.Symbol,
+    exportSymbol: ts.Symbol | undefined
+) {
+    // We already have this. Create a reference.
+    const ref = new ReferenceReflection(
+        exportSymbol?.name ?? symbol.name,
+        target,
+        context.scope
+    );
+    context.addChild(ref);
+    context.registerReflection(ref, symbol);
+
+    context.trigger(
+        ConverterEvents.CREATE_DECLARATION,
+        ref,
+        // FIXME this isn't good enough.
+        context.converter.getNodesForSymbol(symbol, ReflectionKind.Reference)[0]
+    );
 }
 
 function convertVariable(
@@ -896,8 +906,16 @@ function setModifiers(
     reflection: Reflection
 ) {
     const modifiers = ts.getCombinedModifierFlags(declaration);
-    // Note: We only set this flag if the modifier is present because we allow
-    // fake "private" or "protected" members via @private and @protected
+
+    if (
+        ts.isMethodDeclaration(declaration) ||
+        ts.isPropertyDeclaration(declaration) ||
+        ts.isAccessor(declaration)
+    ) {
+        if (ts.isPrivateIdentifier(declaration.name)) {
+            reflection.setFlag(ReflectionFlag.Private);
+        }
+    }
     if (hasAllFlags(modifiers, ts.ModifierFlags.Private)) {
         reflection.setFlag(ReflectionFlag.Private);
     }

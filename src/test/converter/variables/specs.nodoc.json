@@ -247,7 +247,7 @@
               }
             }
           },
-          "defaultValue": "..."
+          "defaultValue": "[]"
         },
         {
           "id": 8,
@@ -271,7 +271,7 @@
             ],
             "name": "Array"
           },
-          "defaultValue": "..."
+          "defaultValue": "{}"
         }
       ],
       "groups": [
@@ -414,13 +414,6 @@
     },
     {
       "id": 24,
-      "name": "symbols",
-      "kind": 1,
-      "kindString": "Module",
-      "flags": {}
-    },
-    {
-      "id": 25,
       "name": "variable",
       "kind": 1,
       "kindString": "Module",
@@ -435,8 +428,7 @@
         1,
         15,
         19,
-        24,
-        25
+        24
       ]
     }
   ]
